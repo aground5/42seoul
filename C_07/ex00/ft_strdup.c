@@ -6,14 +6,14 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 16:15:47 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/20 21:37:15 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/22 14:14:08 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <errno.h>
 
-int		ft_strlen(char *s)
+int	ft_strlen(char *s)
 {
 	int	len;
 
@@ -47,6 +47,6 @@ char	*ft_strdup(char *src)
 		src++;
 		dest++;
 	}
-	*dest = '\x00'
+	*dest = '\x00';
 	return (ret);
 }

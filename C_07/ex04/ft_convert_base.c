@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:47:52 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/20 11:17:22 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/22 14:19:46 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include <stdbool.h>
 
 char	*mov_str_to_real_value(char *str, int *isMinus);
-int		ft_atoi_base(char *str, char *base, int baseLen, unsigned char *baseHash);
+int		ft_atoi_base(char *str, char *base, int baseLen, \
+		unsigned char *baseHash);
 int		convert_base(int n, unsigned char *converted, int baseLen, int minus);
-char	*writenbr_base(char *base, unsigned char *converted, int convLen, bool isMinus);
+char	*writenbr_base(char *base, unsigned char *converted, \
+	   	int convLen, bool isMinus);
 char	*ft_getnbr_base(int nbr, char *base, int baseLen);
 
-void init_array(unsigned char *str, int size, unsigned char initChar)
+void	init_array(unsigned char *str, int size, unsigned char initChar)
 {
 	int	i;
 
@@ -31,10 +33,10 @@ void init_array(unsigned char *str, int size, unsigned char initChar)
 	}
 }
 
-int validate_base(unsigned char *base, unsigned char *hash)
+int	validate_base(unsigned char *base, unsigned char *hash)
 {
 	int		len;
-	
+
 	init_array(hash, 0x100, 0);
 	len = 0;
 	while (base[len] != '\x00')
@@ -54,17 +56,15 @@ int validate_base(unsigned char *base, unsigned char *hash)
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	int				baseTen;
-	char			*baseTarget;
 	int				baseFromLen;
 	int				baseToLen;
 	unsigned char	baseFromHash[0x100];
 	unsigned char	baseToHash[0x100];
-	
+
 	baseFromLen = validate_base((unsigned char *)base_from, baseFromHash);
 	baseToLen = validate_base((unsigned char *)base_to, baseToHash);
 	if (baseFromLen <= 1 || baseToLen <= 1)
 		return (NULL);
 	baseTen = ft_atoi_base(nbr, base_from, baseFromLen, baseFromHash);
-	baseTarget = ft_getnbr_base(baseTen, base_to, baseToLen);
-	return (baseTarget);
+	return (ft_getnbr_base(baseTen, base_to, baseToLen));
 }

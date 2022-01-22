@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:24:00 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/20 21:48:45 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/22 14:15:40 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_strlen(char *s)
 {
 	int	len;
 
+	len = 0;
 	while (*s)
 	{
 		s++;
@@ -55,27 +56,24 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	char	*joined;
 	int		joinedLen;
 	int		i;
-	int		j;
 
-	if (size <= 0)
+	if (size < 0)
+		return (NULL);
+	if (size == 0)
 	{
 		joined = (char *)malloc(sizeof(char));
 		if (joined == NULL)
-			return (0);
+			return (NULL);
 		joined[0] = '\x00';
 		return (joined);
 	}
 	joinedLen = ft_strlen(sep) * (size - 1);
 	i = 0;
 	while (i < size)
-	{
-		joinedLen += ft_strlen(strs[i]);
-		i++;
-	}
+		joinedLen += ft_strlen(strs[i++]);
 	joined = (char *)malloc(sizeof(char) * (joinedLen + 1));
 	if (joined == NULL)
 		return (0);
 	ft_strjoin_2(size, strs, sep, joined);
-	joined[joinedLen] = '\x00';
 	return (joined);
 }

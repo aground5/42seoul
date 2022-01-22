@@ -9,14 +9,16 @@ RM	= rm -f
 
 CFLAGS	= -Wall -Wextra -Werror
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+INC	= -I./includes
 
-${NAME}:	${OBJS}
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} ${INC}
+
+all:	${OBJS}
 	ar rc ${NAME} ${OBJS}
 	ranlib ${NAME}
 
-all:	${NAME}
+${NAME}:	all
 
 clean:
 	${RM} ${OBJS}

@@ -6,10 +6,11 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 12:52:06 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/20 11:15:45 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/22 14:25:34 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
 
@@ -63,15 +64,16 @@ int	convert_base(int n, unsigned char *converted, int baseLen, int minus)
 	return (len);
 }
 
-char	*writenbr_base(char *base, unsigned char *converted, int convLen, bool isMinus)
+char	*writenbr_base(char *base, unsigned char *converted, \
+		int convLen, bool isMinus)
 {
 	int		i;
 	char	*ret;
 
 	if (isMinus)
-		ret = (char *)malloc(sizeof(char) * (convLen + 1));
+		ret = (char *)malloc(sizeof(char) * (convLen + 2));
 	else
-		ret = (char *)malloc(sizeof(char) * convLen);
+		ret = (char *)malloc(sizeof(char) * (convLen + 1));
 	if (ret == NULL)
 		return (NULL);
 	if (isMinus)
@@ -85,6 +87,7 @@ char	*writenbr_base(char *base, unsigned char *converted, int convLen, bool isMi
 		ret[i] = base[converted[convLen - 1 - i]];
 		i++;
 	}
+	ret[i] = '\x00';
 	if (isMinus)
 		ret--;
 	return (ret);
@@ -98,11 +101,12 @@ char	*ft_getnbr_base(int nbr, char *base, int baseLen)
 
 	if (nbr == 0)
 	{
-		ret = (char *)malloc(sizeof(char));
+		ret = (char *)malloc(sizeof(char) * 2);
 		if (ret == NULL)
 			return (NULL);
-		*ret = *base;
-		return ret;
+		ret[0] = *base;
+		ret[1] = '\x00';
+		return (ret);
 	}
 	if (nbr < 0)
 	{
