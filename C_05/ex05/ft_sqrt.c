@@ -6,32 +6,22 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 15:48:27 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/13 16:44:25 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/14 16:12:39 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_sqrt(int nb)
 {
-	int	root;
-	int	overflow;
+	int	sqrt;
 
-	root = nb;
-	overflow = root * root;
-	while(overflow < root)
+	sqrt = 0;
+	while (sqrt < 46341)
 	{
-		root /= 2;
-		overflow = root * root;
+		if (sqrt * sqrt == nb)
+			return (sqrt);
+		else if (sqrt * sqrt > nb)
+			return (0);
+		sqrt++;
 	}
-	while(root * root > nb)
-	{
-		root /= 2;
-	}
-	return root;
-}
-
-#include <stdio.h>
-int main(void)
-{
-	printf("%d", ft_sqrt(1000000000));
-
+	return (0);
 }

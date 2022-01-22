@@ -6,16 +6,18 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 15:35:13 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/12 10:02:42 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/18 12:35:28 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(char *str)
 {
-	int isMinus;
-	int result;
+	int				isMinus;
+	unsigned int	uResult;
+	int				result;
 
 	isMinus = 0;
+	uResult = 0;
 	result = 0;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
@@ -27,11 +29,12 @@ int	ft_atoi(char *str)
 	}
 	while (*str >= '0' && *str <= '9')
 	{
-		result *= 10;
-		result += *str - '0';
-		str++;
+		uResult *= 10;
+		uResult += *(str++) - '0';
 	}
 	if (isMinus == 1)
-		result *= -1;
+		result = uResult * (-1);
+	else
+		result = uResult;
 	return (result);
 }

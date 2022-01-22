@@ -1,0 +1,5 @@
+Credentials cache: API:0404961D-D09C-40DB-83E0-850E0ABA4495
+        Principal: sgi@42SEOUL.KR
+
+  Issued                Expires               Principal
+Jan  3 17:11:03 2022  Jan  4 03:11:03 2022  krbtgt/42SEOUL.KR@42SEOUL.KR
