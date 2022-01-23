@@ -31,10 +31,6 @@ void	ft_putnbr(int nb)
 			nb *= -1;
 			write(1, "-", 1);
 		}
-		else if (nb == 0)
-		{
-			write(1, "0", 1);
-		}
 		write_nbr(nb);
 	}
 }
