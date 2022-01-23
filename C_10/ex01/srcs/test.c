@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 12:29:38 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/23 12:45:57 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/23 19:48:33 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,9 @@ int	main(int argc, char **argv)
 	int			fd;
 	extern int	errno;
 
-	(void)argv;
 	if (argc == 1)
 	{
-		while (read(0, &c, 1) != 0)
-		{
-			write(1, &c, 1);
-			write_file(0);
-		}
+		write_file(0);
 		return (0);
 	}
 	i = 1;
@@ -62,4 +57,7 @@ int	main(int argc, char **argv)
 			write_file(fd);
 		i++;
 	}
+	close(fd);
+	write_file(0);
+	return (0);
 }

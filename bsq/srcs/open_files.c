@@ -31,26 +31,63 @@ int	is_printable(char c)
 	return (0);
 }
 
+char	*ft_string_realloc(char *src, int size)
+{
+	int		i;
+	char	*dest;
+
+	dest = (char *)malloc(sizeof(char) * size);
+	if (dest == NULL)
+	{
+		free(src);
+		return (NULL);
+	}
+	i = 0;
+	while (i < size - 1)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	free(src);
+	return (NULL);
+}
+
 char	**make_field(int fd, t_map *map)
 {
 	char	**field;
-	char	*line;
-	char	c;
-	int		idx;
+	int		i;
+	int		j;
 
 	field = (char **)malloc(sizeof(char *) * map->line);
-	idx = 0;
-	while (read(fd, &c, 1) != 0)
+	if (field == NULL)
+		return (NULL);
+	field[0] = (char *)malloc(sizeof(char));
+	if (field[0] == NULL)
 	{
-		if (c == map.empty || c == map.obstacle)
+		free(field);
+		return (NULL);
+	}
+	i = 0;
+	while (read(fd, &field[0][i], 1) != 0)
+	{
+		if (field[0][i] != '\n')
 		{
-
+			field[0] = ft_string_realloc(field[0], i + 2);
+			if (field[0] == NULL)
+			{
+				free(field);
+				return (NULL);
+			}
 		}
 		else
+			break ;
+		if (field[0][i] != map->empty
+			&& field[0][i] != map->obstacle)
 		{
-			make_field_fail_handler();
+			
 			return (NULL);
 		}
+		i++;
 	}
 }
 

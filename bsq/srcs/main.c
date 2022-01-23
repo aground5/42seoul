@@ -15,7 +15,7 @@ int	main(int argc, char **argv)
 	while (i < argc - 1)
 	{
 		fd = open(argv[i + 1], O_RDONLY);
-		if (input_fd < 0)
+		if (fd < 0)
 		{
 			func_fail_handler();
 			return (-1);

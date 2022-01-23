@@ -31,5 +31,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	write_file(fd);
+	close(fd);
 	return (0);
 }
