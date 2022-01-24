@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "bsq.h"
 
@@ -89,7 +89,6 @@ int	main(int argc, char **argv)
 			free(map.field[0]);
 			free(map.field);
 		}
-		system("leaks bsq > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");	// TODO: delete
 		return (errno);
 	}
 	i = 1;
@@ -99,6 +98,5 @@ int	main(int argc, char **argv)
 		errno += multi_argv_start(argv[i]);
 		i++;
 	}
-	system("leaks bsq > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");		// TODO: delete
 	return (errno);
 }

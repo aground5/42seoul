@@ -44,7 +44,7 @@ char		*ft_string_realloc(char *src, int size);
 int			field_of_first(int fd, t_map *map);
 int			field_of_remainder(int fd, t_map *map, int line_idx);
 int			make_field(int fd, t_map *map);
-int			get_board_information(int fd, t_map *map);
+int			get_field_information(int fd, t_map *map);
 int			convert_files_to_map(int fd, t_map *map);
 
 int			is_possible(t_map *map, int row, int col, int dia);

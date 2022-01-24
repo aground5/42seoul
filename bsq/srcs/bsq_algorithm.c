@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
 #include "bsq.h"
 
 void	fill_map(t_map *map, t_square square)

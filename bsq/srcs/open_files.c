@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -92,7 +91,7 @@ int	make_field(int fd, t_map *map)
 	return (NORMEX);
 }
 
-int	get_board_information(int fd, t_map *map)
+int	get_field_information(int fd, t_map *map)
 {
 	int		len;
 	char	first_line[14];
@@ -126,7 +125,7 @@ int	convert_files_to_map(int fd, t_map *map)
 	int		errno;
 	char	c;
 
-	errno = get_board_information(fd, map);
+	errno = get_field_information(fd, map);
 	if (errno == MERRBFCLR)
 		while (read(fd, &c, 1) != 0 && c != '\n')
 			continue ;

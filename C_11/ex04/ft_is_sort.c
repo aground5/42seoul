@@ -13,12 +13,26 @@
 int	ft_is_sort(int *tab, int length, int(*f)(int, int))
 {
 	int	i;
+	int	mode;
 
 	i = 1;
+	mode = 0;
 	while (i < length)
 	{
 		if (f(tab[i - 1], tab[i]) > 0)
-			return (0);
+		{
+			if (mode == 0)
+				mode = -1;
+			else if (mode == 1)
+				return (0);
+		}
+		else
+		{
+			if (mode == 0)
+				mode = 1;
+			else if (mode == -1)
+				return (0);
+		}
 	}
 	return (1);
 }
