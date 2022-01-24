@@ -35,7 +35,7 @@ void	print_field(t_map	*map)
 	}
 }
 
-void	multi_argv_start(char *fileName)
+int	multi_argv_start(char *fileName)
 {
 	int		fd;
 	int		errno;
@@ -45,7 +45,7 @@ void	multi_argv_start(char *fileName)
 	if (fd < 0)
 	{
 		print_error_msg(FILERR);
-		return ;
+		return (-1);
 	}
 	errno = convert_files_to_map(fd, &map);
 	print_error_msg(errno);
@@ -57,6 +57,7 @@ void	multi_argv_start(char *fileName)
 		free(map.field);
 	}
 	close(fd);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -76,15 +77,12 @@ int	main(int argc, char **argv)
 			free(map.field[0]);
 			free(map.field);
 		}
-		system("leaks bsq > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");	// TODO: delete
 		return (0);
 	}
 	i = 1;
 	while (i < argc)
 	{
 		multi_argv_start(argv[i]);
-		i++;
 	}
-	system("leaks bsq > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");		// TODO: delete
-	return (0);
+	return (errno);
 }

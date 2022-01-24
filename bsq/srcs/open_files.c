@@ -116,13 +116,13 @@ int	convert_files_to_map(int fd, t_map *map)
 
 	errno = get_board_information(fd, map);
 	if (errno == MERRBFCLR)
-		while (read(1, &c, 1) != 0 && c != '\n')
+		while (read(fd, &c, 1) != 0 && c != '\n')
 			continue ;
 	if (errno == MAPERR || errno == MERRBFCLR)
 		return (MAPERR);
 	errno = make_field(fd, map);
 	if (errno == MERRBFCLR || errno == BCLRLNMF)
-		while (read(1, &c, 1) != 0 && c != '\n')
+		while (read(fd, &c, 1) != 0 && c != '\n')
 			continue ;
 	if (errno == MAPERR || errno == MERRBFCLR)
 	{

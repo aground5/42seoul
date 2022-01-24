@@ -20,15 +20,23 @@ typedef struct s_map {
 	char	**field;
 }			t_map;
 
-typedef struct s_
+typedef struct s_square {
+	int	row;
+	int	col;
+	int	dia;
+}		t_square;
 
-int		ft_natoi_positive(char *str, int n);
-char	*ft_string_realloc(char *src, int size);
+int			ft_natoi_positive(char *str, int n);
+char		*ft_string_realloc(char *src, int size);
 
-int	field_of_first(int fd, t_map *map);
-int	field_of_remainder(int fd, t_map *map, int line_idx);
-int	make_field(int fd, t_map *map);
-int	get_board_information(int fd, t_map *map);
-int	convert_files_to_map(int fd, t_map *map);
+int			field_of_first(int fd, t_map *map);
+int			field_of_remainder(int fd, t_map *map, int line_idx);
+int			make_field(int fd, t_map *map);
+int			get_board_information(int fd, t_map *map);
+int			convert_files_to_map(int fd, t_map *map);
+
+int			is_possible(t_map *map, int row, int col, int dia);
+int			dia_increase(t_map *map, int row, int col);
+t_square	algorithm_start(t_map *map);
 
 #endif
