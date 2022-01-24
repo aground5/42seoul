@@ -64,8 +64,8 @@ int	field_of_remainder(int fd, t_map *map, int line_idx)
 
 int	make_field(int fd, t_map *map)
 {
-	int	i;
-	int	errno;
+	int		i;
+	int		errno;
 
 	map->field = (char **)malloc(sizeof(char *) * map->line);
 	if (map->field == NULL)
@@ -88,6 +88,8 @@ int	make_field(int fd, t_map *map)
 			return (errno);
 		i++;
 	}
+	if (fd != 0 && read(fd, &i, 1) != 0)
+		return (MAPERR);
 	return (NORMEX);
 }
 
@@ -108,7 +110,7 @@ int	get_field_information(int fd, t_map *map)
 	if (len == 14)
 		return (MERRBFCLR);
 	map->line = ft_natoi_positive(first_line, len - 3);
-	if (map->line == -1)
+	if (map->line == -1 || len < 4)
 		return (MAPERR);
 	map->empty = first_line[len - 3];
 	map->obstacle = first_line[len - 2];
