@@ -6,6 +6,11 @@
 # define MALOFL 2
 # define MAPERR 3
 
+# define MERRBFCLR -1
+# define BCLRLNMF -2
+# define FIELDMF -3
+# define FDLNMF -4
+
 typedef struct s_map {
 	int		line;
 	int		len;
@@ -14,6 +19,8 @@ typedef struct s_map {
 	char	full;
 	char	**field;
 }			t_map;
+
+typedef struct s_
 
 int		ft_natoi_positive(char *str, int n);
 char	*ft_string_realloc(char *src, int size);
