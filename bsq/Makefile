@@ -1,4 +1,4 @@
-SRCS	= ./srcs/main.c
+SRCS	= ./srcs/ft_ctype.c ./srcs/open_files.c ./srcs/ft_stdlib.c ./srcs/main.c
 OBJS	= ${SRCS:.c=.o}
 
 NAME	= bsq

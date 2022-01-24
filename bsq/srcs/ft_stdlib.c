@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 int	ft_natoi_positive(char *str, int n)
 {
 	int				i;
@@ -13,7 +15,7 @@ int	ft_natoi_positive(char *str, int n)
 			result += str[i] - '0';
 		}
 		else
-			return (-1)
+			return (-1);
 		i++;
 	}
 	return (result);
@@ -37,5 +39,5 @@ char	*ft_string_realloc(char *src, int size)
 		i++;
 	}
 	free(src);
-	return (NULL);
+	return (dest);
 }
