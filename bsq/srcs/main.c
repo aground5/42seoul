@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/24 21:32:38 by sgi               #+#    #+#             */
+/*   Updated: 2022/01/24 21:32:40 by sgi              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -35,7 +47,7 @@ void	print_field(t_map	*map)
 	}
 }
 
-void	multi_argv_start(char *fileName)
+int	multi_argv_start(char *fileName)
 {
 	int		fd;
 	int		errno;
@@ -45,7 +57,7 @@ void	multi_argv_start(char *fileName)
 	if (fd < 0)
 	{
 		print_error_msg(FILERR);
-		return ;
+		return (FILERR);
 	}
 	errno = convert_files_to_map(fd, &map);
 	print_error_msg(errno);
@@ -57,6 +69,7 @@ void	multi_argv_start(char *fileName)
 		free(map.field);
 	}
 	close(fd);
+	return (errno);
 }
 
 int	main(int argc, char **argv)
@@ -77,14 +90,15 @@ int	main(int argc, char **argv)
 			free(map.field);
 		}
 		system("leaks bsq > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");	// TODO: delete
-		return (0);
+		return (errno);
 	}
 	i = 1;
+	errno = 0;
 	while (i < argc)
 	{
-		multi_argv_start(argv[i]);
+		errno += multi_argv_start(argv[i]);
 		i++;
 	}
 	system("leaks bsq > leaks_result_temp; cat leaks_result_temp | grep leaked && rm -rf leaks_result_temp");		// TODO: delete
-	return (0);
+	return (errno);
 }

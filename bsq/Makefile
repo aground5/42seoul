@@ -1,4 +1,16 @@
-SRCS	= ./srcs/ft_ctype.c ./srcs/open_files.c ./srcs/ft_stdlib.c ./srcs/main.c ./srcs/bsq_algorithm.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/24 21:33:23 by sgi               #+#    #+#              #
+#    Updated: 2022/01/24 21:33:30 by sgi              ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS	= ./srcs/open_files.c ./srcs/ft_stdlib.c ./srcs/main.c ./srcs/bsq_algorithm.c
 OBJS	= ${SRCS:.c=.o}
 
 NAME	= bsq

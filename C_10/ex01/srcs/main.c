@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 12:29:38 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/23 19:48:33 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/23 12:45:57 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,67 @@
 #include <errno.h>
 #include "ft_cat.h"
 
-void	handle_error(char *filename, char *err_msg)
+void	handle_error(char *pgname, char *filename, char *err_msg)
 {
-	write(1, "cat: ", 5);
-	//filename = basename(filename);	TODO: is this right?
+	pgname = basename(pgname);
+	write(1, pgname, ft_strlen(pgname));
+	write(1, ": ", 2);
 	write(1, filename, ft_strlen(filename));
 	write(1, ": ", 2);
 	write(1, err_msg, ft_strlen(err_msg));
 	write(1, "\n", 1);
 }
 
-void	write_file(int fd)
+int	write_file(int fd)
 {
 	char	c;
+	int		bytes;
 
+	bytes = 0;
 	while (read(fd, &c, 1) != 0)
+	{
+		bytes++;
 		write(1, &c, 1);
+	}
+	return (bytes);
+}
+
+int	open_file(char *pdname, char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_RDWR);
+	if (fd < 0)
+	{
+		handle_error(pdname, filename, strerror(errno));
+		return (1);
+	}
+	else
+	{
+		write_file(fd);
+		close(fd);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	char		c;
 	int			i;
-	int			fd;
+	int			err;
 	extern int	errno;
 
+	err = 0;
 	if (argc == 1)
 	{
-		write_file(0);
-		return (0);
+		while (write_file(0) != 0)
+			continue ;
+		return (err);
 	}
 	i = 1;
 	while (i < argc)
 	{
-		fd = open(argv[i], O_RDWR);
-		if (fd < 0)
-			handle_error(argv[i], strerror(errno));
-		else
-			write_file(fd);
+		err += open_file(argv[0], argv[i]);
 		i++;
 	}
-	close(fd);
-	write_file(0);
-	return (0);
+	return (err);
 }
