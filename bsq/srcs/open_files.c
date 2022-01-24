@@ -3,120 +3,68 @@
 
 #include "bsq.h"
 
-int	ft_natoi_positive(char *str, int n)
-{
-	int				i;
-	int				result;
 
-	i = 0;
-	result = 0;
-	while (i < n)
+int make_field(int fd, t_map *map)
+{
+	int	i;
+	
+	map->field = (char **)malloc(sizeof(char *) * map->line);
+	if (map->field == NULL)
+		return (-1);
+	map->field[0] = (char *)malloc(sizeof(char));
+	if (map->field[0] == NULL)	// -1이면 NULL까지 free하기
+		return (-1);
+	map->allocated = 1;
+	map->len = field_of_first(fd, map)
+	if (map->len == -1 || map->len == 0)	// 0이면 allocated 참고
+		return (map->len);
+	i = 1;
+	while (i < map->len)
 	{
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			result *= 10;
-			result += str[i] - '0';
-		}
-		else
-			return (-1)
+		map->field[i] = (char *)malloc(sizeof(char) * len);
+		if (map->field[i] == NULL)
+			return (-1);
+		map->allocated = i + 1;
+		field_of_remainder(fd, map);
 		i++;
 	}
-	return (result);
 }
 
-int	is_printable(char c)
+int	get_board_information(int fd, t_map *map)
 {
-	if (c >= 0x20 && c <= 0xfe)
-		return (1);
-	return (0);
-}
+	int		len;
+	char	first_line[14];
 
-char	*ft_string_realloc(char *src, int size)
-{
-	int		i;
-	char	*dest;
-
-	dest = (char *)malloc(sizeof(char) * size);
-	if (dest == NULL)
+	len = 0;
+	while (read(fd, &first_line[len], 1) != 0 && len < 14)
 	{
-		free(src);
-		return (NULL);
+		if (first_line[len] == '\n')
+			break;
+		len++;
 	}
-	i = 0;
-	while (i < size - 1)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	free(src);
-	return (NULL);
-}
-
-char	**make_field(int fd, t_map *map)
-{
-	char	**field;
-	int		i;
-	int		j;
-
-	field = (char **)malloc(sizeof(char *) * map->line);
-	if (field == NULL)
-		return (NULL);
-	field[0] = (char *)malloc(sizeof(char));
-	if (field[0] == NULL)
-	{
-		free(field);
-		return (NULL);
-	}
-	i = 0;
-	while (read(fd, &field[0][i], 1) != 0)
-	{
-		if (field[0][i] != '\n')
-		{
-			field[0] = ft_string_realloc(field[0], i + 2);
-			if (field[0] == NULL)
-			{
-				free(field);
-				return (NULL);
-			}
-		}
-		else
-			break ;
-		if (field[0][i] != map->empty
-			&& field[0][i] != map->obstacle)
-		{
-			
-			return (NULL);
-		}
-		i++;
-	}
+	if (len == 14)
+		return (0);	// line too long
+	len = i;
+	map->line = ft_natoi_positive(first_line, len - 3);
+	if (map->line == -1)
+		return (0);	// map error
+	map->empty = first_line[len - 3];
+	map->obstacle = first_line[len - 2];
+	map->full = first_line[len - 1];
+	if (map->empty == map.obstacle
+		|| map->obstacle == map.full
+		|| map->empty == map.full)
+		return (0);	// map error
+	return (1);	// normal exit
 }
 
 char	*convert_files_to_map(int fd)
 {
-	int		i;
-	int		len;
-	char	first_line[13];
 	t_map	map;
 
-	i = 0;
-	while (read(fd, &first_line[i], 1) != 0 && i < 13)
+	if (get_board_information(fd, &map) == 0)
 	{
-		if (first_line[i] == '\n')
-			break;
-		i++;
+		// TODO: map error
 	}
-	if (i == 13)
-		return (NULL);
-	len = i;
-	map.line = ft_natoi_positive(first_line, len - 3);
-	if (map.line == -1)
-		return (NULL);
-	map.empty = first_line[len - 3];
-	map.obstacle = first_line[len - 2];
-	map.full = first_line[len - 1];
-	if (map.empty == map.obstacle
-		|| map.obstacle == map.full
-		|| map.empty == map.full)
-		return (NULL);
-	map.field = make_field(fd, &map);
+	make_field(fd, &map);
 }
