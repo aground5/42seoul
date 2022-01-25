@@ -16,6 +16,8 @@
 #include <libgen.h>
 #include <errno.h>
 
+#include "ft_tail.h"
+
 void	handle_error(char *pgname, char *filename, char *err_msg)
 {
 	pgname = basename(pgname);
@@ -59,24 +61,43 @@ int	open_file(char *pdname, char *filename)
 	return (0);
 }
 
+int	valid_option(int argc, char **argv)
+{
+	if (argv[1][1] == 'c')
+	{
+		if (argv[1][2] == '\x00')
+		{
+			if (argc < 3)
+				return (REQARG);
+		}
+		else
+		{
+			if
+		}
+		
+	}
+	else
+		return (INVALIDOP);
+}
+
 int	main(int argc, char **argv)
 {
-	int			i;
-	int			err;
 	extern int	errno;
+	int			err;
+	int			fileStartIndex;
 
-	err = 0;
+	err = NORMEX;
 	if (argc == 1)
 	{
-		while (write_file(0) != 0)
-			continue ;
-		return (err);
+
 	}
-	i = 1;
-	while (i < argc)
+	else if (argv[1][0] == '-')
 	{
-		err += open_file(argv[0], argv[i]);
-		i++;
+		err = valid_option(argc, argv);
 	}
-	return (err);
+	else
+	{
+		/* code */
+	}
+	
 }

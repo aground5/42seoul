@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 21:32:38 by sgi               #+#    #+#             */
-/*   Updated: 2022/01/24 21:32:40 by sgi              ###   ########.fr       */
+/*   Updated: 2022/01/25 20:10:26 by chanbpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_error_msg(int errno)
 		write(1, "map error\n", 10);
 }
 
-void	print_field(t_map	*map)
+void	print_field(t_map *map, int isLast)
 {
 	int	i;
 	int	j;
@@ -45,9 +45,11 @@ void	print_field(t_map	*map)
 		write(1, "\n", 1);
 		i++;
 	}
+	if (!isLast)
+		write(1, "\n", 1);
 }
 
-int	multi_argv_start(char *fileName)
+int	multi_argv_start(char *fileName, int isLast)
 {
 	int		fd;
 	int		errno;
@@ -64,7 +66,7 @@ int	multi_argv_start(char *fileName)
 	if (errno == NORMEX)
 	{
 		algorithm_start(&map);
-		print_field(&map);
+		print_field(&map, isLast);
 		free(map.field[0]);
 		free(map.field);
 	}
@@ -85,7 +87,7 @@ int	main(int argc, char **argv)
 		if (errno == NORMEX)
 		{
 			algorithm_start(&map);
-			print_field(&map);
+			print_field(&map, 1);
 			free(map.field[0]);
 			free(map.field);
 		}
@@ -95,7 +97,7 @@ int	main(int argc, char **argv)
 	errno = 0;
 	while (i < argc)
 	{
-		errno += multi_argv_start(argv[i]);
+		errno += multi_argv_start(argv[i], i == argc - 1);
 		i++;
 	}
 	return (errno);

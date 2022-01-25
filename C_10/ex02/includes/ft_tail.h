@@ -13,6 +13,14 @@
 #ifndef FT_CAT_H
 # define FT_CAT_H
 
+# define NORMEX 0
+# define INVALIDOP 1
+# define ILGALOFSET 2
+# define REQARG 3
+
 int	ft_strlen(char *s);
+int	ft_strncmp(char *s1, char *s2, unsigned int n);
+
+int	ft_atoi(char *str);
 
 #endif

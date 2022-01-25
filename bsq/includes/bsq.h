@@ -47,6 +47,8 @@ int			make_field(int fd, t_map *map);
 int			get_field_information(int fd, t_map *map);
 int			convert_files_to_map(int fd, t_map *map);
 
+int			check_map_flood(int fd);
+
 int			is_possible(t_map *map, int row, int col, int dia);
 int			dia_increase(t_map *map, int row, int col);
 t_square	algorithm_start(t_map *map);

@@ -20,7 +20,7 @@ int	field_of_first(int fd, t_map *map)
 	int	i;
 
 	i = 0;
-	while (read(fd, &map->field[0][i], 1) != 0)
+	while (read(fd, &map->field[0][i], 1) > 0)
 	{
 		if (map->field[0][i] != '\n')
 		{
@@ -36,6 +36,8 @@ int	field_of_first(int fd, t_map *map)
 		i++;
 	}
 	map->len = i;
+	if (map->len <= 0)
+		return (MAPERR);
 	return (NORMEX);
 }
 
@@ -46,7 +48,7 @@ int	field_of_remainder(int fd, t_map *map, int line_idx)
 
 	i = 0;
 	while (i < map->len
-		&& read(fd, &(map->field[line_idx][i]), 1) != 0)
+		&& read(fd, &(map->field[line_idx][i]), 1) > 0)
 	{
 		if (map->field[line_idx][i] == '\n')
 			return (MAPERR);
@@ -55,7 +57,7 @@ int	field_of_remainder(int fd, t_map *map, int line_idx)
 			return (MERRBFCLR);
 		i++;
 	}
-	if (read(fd, &c, 1) == 0)
+	if (read(fd, &c, 1) <= 0)
 		return (MAPERR);
 	if (c != '\n')
 		return (MERRBFCLR);
@@ -83,14 +85,12 @@ int	make_field(int fd, t_map *map)
 	while (i < map->line)
 	{
 		map->field[i] = map->field[i - 1] + map->len;
-		errno = field_of_remainder(fd, map, i);
+		errno = field_of_remainder(fd, map, i++);
 		if (errno != NORMEX)
 			return (errno);
-		i++;
 	}
-	if (fd != 0 && read(fd, &i, 1) != 0)
-		return (MAPERR);
-	return (NORMEX);
+	errno = check_map_flood(fd);
+	return (errno);
 }
 
 int	get_field_information(int fd, t_map *map)
@@ -101,7 +101,7 @@ int	get_field_information(int fd, t_map *map)
 	len = 0;
 	while (len < 14)
 	{
-		if (read(fd, &first_line[len], 1) == 0)
+		if (read(fd, &first_line[len], 1) <= 0)
 			return (MAPERR);
 		if (first_line[len] == '\n')
 			break ;
@@ -110,7 +110,7 @@ int	get_field_information(int fd, t_map *map)
 	if (len == 14)
 		return (MERRBFCLR);
 	map->line = ft_natoi_positive(first_line, len - 3);
-	if (map->line == -1 || len < 4)
+	if (map->line <= 0 || len < 4)
 		return (MAPERR);
 	map->empty = first_line[len - 3];
 	map->obstacle = first_line[len - 2];
@@ -129,13 +129,13 @@ int	convert_files_to_map(int fd, t_map *map)
 
 	errno = get_field_information(fd, map);
 	if (errno == MERRBFCLR)
-		while (read(fd, &c, 1) != 0 && c != '\n')
+		while (read(fd, &c, 1) > 0 && c != '\n')
 			continue ;
 	if (errno == MAPERR || errno == MERRBFCLR)
 		return (MAPERR);
 	errno = make_field(fd, map);
 	if (errno == MERRBFCLR || errno == BCLRLNMF)
-		while (read(fd, &c, 1) != 0 && c != '\n')
+		while (read(fd, &c, 1) > 0 && c != '\n')
 			continue ;
 	if (errno == MAPERR || errno == MERRBFCLR)
 	{
