@@ -33,6 +33,7 @@ int	ft_is_sort(int *tab, int length, int(*f)(int, int))
 			else if (mode == -1)
 				return (0);
 		}
+		i++;
 	}
 	return (1);
 }

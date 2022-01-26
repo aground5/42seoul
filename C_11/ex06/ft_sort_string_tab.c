@@ -40,6 +40,8 @@ void	ft_sort_string_tab(char **tab)
 				tab[i] = tab[j];
 				tab[j] = tmp;
 			}
+			j++;
 		}
+		i++;
 	}
 }

@@ -28,6 +28,8 @@ void	ft_advanced_sort_string_tab(char **tab, int(*cmp)(char *, char *))
 				tab[i] = tab[j];
 				tab[j] = tmp;
 			}
+			j++;
 		}
+		i++;
 	}
 }
