@@ -40,26 +40,28 @@ typedef struct s_square {
 	int	col_collide;
 }		t_square;
 
-int		ft_natoi_positive(char *str, int n);
-char	*ft_string_realloc(char *src, int size, int n);
+int			ft_natoi_positive(char *str, int n);
+char		*ft_string_realloc(char *src, int size, int n);
+char		**map_field_maker(int line);
 
-int		field_of_first(int fd, t_map *map);
-int		field_of_remainder(int fd, t_map *map, int line_idx);
-int		make_field(int fd, t_map *map);
-int		get_field_information(int fd, t_map *map);
-int		convert_files_to_map(int fd, t_map *map);
+int			field_of_first(int fd, t_map *map);
+int			field_of_remainder(int fd, t_map *map, int line_idx);
+int			make_field(int fd, t_map *map);
+int			get_field_information(int fd, t_map *map);
+int			convert_files_to_map(int fd, t_map *map);
 
-int		check_map_flood(int fd);
+int			check_map_flood(int fd);
 
-void	fill_map(t_map *map, t_square square);
-int		is_empty_space(t_map *map, int dia, t_square *square);
-int		dia_increase(t_map *map, t_square *square);
-int		algorithm_start(t_map *map);
+void		fill_map(t_map *map, t_square square);
+int			is_empty_space(t_map *map, int dia, t_square *square);
+int			dia_increase(t_map *map, t_square *square);
+t_square	process_algorithm(t_map *map, char **index_field);
+int			start_algorithm(t_map *map);
 
-void	save_max_collide(int row, int col, t_square *square);
-void	index_passing_zone(t_square square, char **index_field);
-char	**init_index_field(t_map *map);
-void	init_square(t_square *square, int row, int col);
-void	free_index_field(char **index_field);
+void		save_max_collide(int row, int col, t_square *square);
+void		index_passing_zone(t_square square, char **index_field);
+char		**malloc_index_field(t_map *map);
+void		init_square(t_square *square, int row, int col);
+void		init_index_field(char **index_field, t_map *map);
 
 #endif

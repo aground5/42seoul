@@ -76,23 +76,19 @@ int	dia_increase(t_map *map, t_square *square)
 	return (i);
 }
 
-int	algorithm_start(t_map *map)
+t_square	process_algorithm(t_map *map, char **index_field)
 {
 	int			i;
 	int			j;
 	t_square	square;
 	t_square	max_square;
-	char		**index_field;
 
-	index_field = init_index_field(map);
-	if (index_field == NULL)
-		return (MALOFL);
 	max_square.dia = 0;
-	i = -1;
-	while (++i < map->line)
+	i = 0;
+	while (i < map->line)
 	{
-		j = -1;
-		while (++j < map->len)
+		j = 0;
+		while (j < map->len)
 		{
 			if (index_field[i][j] == 'x')
 				continue ;
@@ -101,9 +97,25 @@ int	algorithm_start(t_map *map)
 			if (square.dia > max_square.dia)
 				max_square = square;
 			index_passing_zone(square, index_field);
+			j++;
 		}
+		i++;
 	}
-	free_index_field(index_field);
+	return (max_square);
+}
+
+int	start_algorithm(t_map *map)
+{
+	t_square	max_square;
+	char		**index_field;
+
+	index_field = malloc_index_field(map);
+	init_index_field(index_field, map);
+	if (index_field == NULL)
+		return (MALOFL);
+	max_square = process_algorithm(map, index_field);
+	free(index_field[0]);
+	free(index_field);
 	fill_map(map, max_square);
 	return (NORMEX);
 }

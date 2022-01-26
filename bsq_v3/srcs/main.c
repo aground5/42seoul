@@ -62,14 +62,15 @@ int	multi_argv_start(char *fileName, int isLast)
 		return (FILERR);
 	}
 	errno = convert_files_to_map(fd, &map);
-	print_error_msg(errno);
 	if (errno == NORMEX)
 	{
-		algorithm_start(&map);
-		print_field(&map, isLast);
+		errno = start_algorithm(&map);
+		if (errno == NORMEX)
+			print_field(&map, isLast);
 		free(map.field[0]);
 		free(map.field);
 	}
+	print_error_msg(errno);
 	close(fd);
 	return (errno);
 }
@@ -83,22 +84,20 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 	{
 		errno = convert_files_to_map(0, &map);
-		print_error_msg(errno);
 		if (errno == NORMEX)
 		{
-			algorithm_start(&map);
-			print_field(&map, 1);
+			errno = start_algorithm(&map);
+			if (errno == NORMEX)
+				print_field(&map, 1);
 			free(map.field[0]);
 			free(map.field);
 		}
+		print_error_msg(errno);
 		return (errno);
 	}
-	i = 1;
+	i = 0;
 	errno = 0;
-	while (i < argc)
-	{
+	while (++i < argc)
 		errno += multi_argv_start(argv[i], i == argc - 1);
-		i++;
-	}
 	return (errno);
 }

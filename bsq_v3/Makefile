@@ -16,7 +16,7 @@ OBJS	= ${SRCS:.c=.o}
 NAME	= bsq
 
 CC	= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 
 RM	= rm -f
 

@@ -40,10 +40,9 @@ void	index_passing_zone(t_square square, char **index_field)
 	}
 }
 
-char	**init_index_field(t_map *map)
+char	**malloc_index_field(t_map *map)
 {
 	int		i;
-	int		j;
 	char	**ret;
 
 	ret = (char **)malloc(sizeof(char *) * map->line);
@@ -61,13 +60,6 @@ char	**init_index_field(t_map *map)
 		ret[i] = ret[i - 1] + map->len;
 		i++;
 	}
-	i = -1;
-	while (++i < map->line)
-	{
-		j = -1;
-		while (++j < map->len)
-			ret[i][j] = 'o';
-	}
 	return (ret);
 }
 
@@ -80,8 +72,20 @@ void	init_square(t_square *square, int row, int col)
 	square->col_collide = 0;
 }
 
-void	free_index_field(char **index_field)
+void	init_index_field(char **index_field, t_map *map)
 {
-	free(index_field[0]);
-	free(index_field);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->line)
+	{
+		j = 0;
+		while (j < map->len)
+		{
+			index_field[i][j] = 'o';
+			j++;
+		}
+		i++;
+	}
 }
