@@ -16,7 +16,7 @@
 
 #include "bsq.h"
 
-void	print_error_msg(int errno)
+void	print_error_msg(int errno, int isLast)
 {
 	if (errno == NORMEX)
 		return ;
@@ -26,6 +26,8 @@ void	print_error_msg(int errno)
 		write(1, "Malloc failed.\n", 15);
 	else if (errno == MAPERR)
 		write(1, "map error\n", 10);
+	if (!isLast)
+		write(1, "\n", 1);
 }
 
 void	print_field(t_map *map, int isLast)
@@ -58,7 +60,7 @@ int	multi_argv_start(char *fileName, int isLast)
 	fd = open(fileName, O_RDONLY);
 	if (fd < 0)
 	{
-		print_error_msg(FILERR);
+		print_error_msg(FILERR, isLast);
 		return (FILERR);
 	}
 	errno = convert_files_to_map(fd, &map);
@@ -70,7 +72,7 @@ int	multi_argv_start(char *fileName, int isLast)
 		free(map.field[0]);
 		free(map.field);
 	}
-	print_error_msg(errno);
+	print_error_msg(errno, isLast);
 	close(fd);
 	return (errno);
 }
@@ -92,7 +94,7 @@ int	main(int argc, char **argv)
 			free(map.field[0]);
 			free(map.field);
 		}
-		print_error_msg(errno);
+		print_error_msg(errno, 1);
 		return (errno);
 	}
 	i = 0;

@@ -14,28 +14,45 @@
 
 #include "bsq.h"
 
-void	save_max_collide(int row, int col, t_square *square)
+void	save_max_collide(int row, int col, t_square *square, int direction)
 {
-	if (square->row_collide < row)
-		square->row_collide = row;
-	if (square->col_collide < col)
-		square->col_collide = col;
+	if (direction == GARO)
+	{
+		if (square->obstacles.garo_obstacle_row < row)
+			square->obstacles.garo_obstacle_row = row;
+		if (square->obstacles.garo_obstacle_col < col)
+			square->obstacles.garo_obstacle_col = col;
+	}
+	else
+	{
+		if (square->obstacles.sero_obstacle_row < row)
+			square->obstacles.sero_obstacle_row = row;
+		if (square->obstacles.sero_obstacle_col < col)
+			square->obstacles.sero_obstacle_col = col;
+	}
 }
 
 void	index_passing_zone(t_square square, char **index_field)
 {
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = square.row;
 	j = square.col;
-	while (i < square.row_collide)
+	while (i <= square.obstacles.garo_obstacle_row)
 	{
 		j = square.col;
-		while (j < square.col_collide)
-		{
+		while (j <= square.obstacles.garo_obstacle_col)
 			index_field[i][j++] = 'x';
-		}
+		i++;
+	}
+	i = square.row;
+	j = square.col;
+	while (i <= square.obstacles.sero_obstacle_row)
+	{
+		j = square.col;
+		while (j <= square.obstacles.sero_obstacle_col)
+			index_field[i][j++] = 'x';
 		i++;
 	}
 }
@@ -48,7 +65,7 @@ char	**malloc_index_field(t_map *map)
 	ret = (char **)malloc(sizeof(char *) * map->line);
 	if (ret == NULL)
 		return (NULL);
-	ret[0] = (char *)malloc(sizeof(char) * (map->line) * (map -> len));
+	ret[0] = (char *)malloc(sizeof(char) * (map->line) * (map->len));
 	if (ret[0] == NULL)
 	{
 		free(ret);
@@ -68,8 +85,10 @@ void	init_square(t_square *square, int row, int col)
 	square->row = row;
 	square->col = col;
 	square->dia = 0;
-	square->row_collide = 0;
-	square->col_collide = 0;
+	square->obstacles.garo_obstacle_col = 0;
+	square->obstacles.garo_obstacle_row = 0;
+	square->obstacles.sero_obstacle_col = 0;
+	square->obstacles.sero_obstacle_row = 0;
 }
 
 void	init_index_field(char **index_field, t_map *map)

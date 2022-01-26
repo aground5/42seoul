@@ -17,10 +17,23 @@
 # define INVALIDOP 1
 # define ILGALOFSET 2
 # define REQARG 3
+# define FILERR 4
+
+# define DEFAULT 0
+# define OP_C 1
+
+typedef struct	s_argument
+{
+	int		argc;
+	char	**argv;
+	int		option;
+	int		offset;
+}			t_argument;
+
 
 int	ft_strlen(char *s);
 int	ft_strncmp(char *s1, char *s2, unsigned int n);
 
-int	ft_atoi(char *str);
+int	ft_atoi_positive(char *str);
 
 #endif

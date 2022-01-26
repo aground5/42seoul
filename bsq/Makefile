@@ -13,7 +13,7 @@
 SRCS	= ./srcs/open_files.c ./srcs/open_files_2.c ./srcs/ft_stdlib.c ./srcs/main.c ./srcs/bsq_algorithm.c ./srcs/bsq_algorithm_2.c
 OBJS	= ${SRCS:.c=.o}
 
-NAME	= bsq
+NAME	= BSQ
 
 CC	= gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -25,8 +25,10 @@ INC	= -I./includes
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} ${INC}
 
-all:	${OBJS}
+${NAME} :	${OBJS}
 	${CC} ${CFLAGS} -o ${NAME} ${OBJS}
+
+all:	${NAME}
 
 clean:
 	${RM} ${OBJS}

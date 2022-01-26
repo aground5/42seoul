@@ -18,86 +18,52 @@
 
 #include "ft_tail.h"
 
-void	handle_error(char *pgname, char *filename, char *err_msg)
+int	validate_option(t_argument *arg)
 {
-	pgname = basename(pgname);
-	write(1, pgname, ft_strlen(pgname));
-	write(1, ": ", 2);
-	write(1, filename, ft_strlen(filename));
-	write(1, ": ", 2);
-	write(1, err_msg, ft_strlen(err_msg));
-	write(1, "\n", 1);
-}
+	int	offset;
 
-int	write_file(int fd)
-{
-	char	c;
-	int		bytes;
-
-	bytes = 0;
-	while (read(fd, &c, 1) != 0)
+	if (arg->argv[1][1] == 'c')
 	{
-		bytes++;
-		write(1, &c, 1);
-	}
-	return (bytes);
-}
-
-int	open_file(char *pdname, char *filename)
-{
-	int	fd;
-
-	fd = open(filename, O_RDWR);
-	if (fd < 0)
-	{
-		handle_error(pdname, filename, strerror(errno));
-		return (1);
-	}
-	else
-	{
-		write_file(fd);
-		close(fd);
-	}
-	return (0);
-}
-
-int	valid_option(int argc, char **argv)
-{
-	if (argv[1][1] == 'c')
-	{
-		if (argv[1][2] == '\x00')
+		arg->option = OP_C;
+		if (arg->argv[1][2] == '\x00')
 		{
-			if (argc < 3)
+			if (arg->argc < 3)
 				return (REQARG);
+			offset = ft_atoi_positive(arg->argv[2]);
+			if (offset == -1)
+				return (ILGALOFSET);
 		}
 		else
 		{
-			if
+			offset = ft_atoi_positive(&arg->argv[1][2]);
+			if (offset == -1)
+				return (ILGALOFSET);
 		}
-		
 	}
 	else
 		return (INVALIDOP);
+	return (NORMEX);
 }
 
 int	main(int argc, char **argv)
 {
 	extern int	errno;
 	int			err;
-	int			fileStartIndex;
+	int			i;
+	t_argument	arg;
 
-	err = NORMEX;
+	arg.argc = argc;
+	arg.argv = argv;	
 	if (argc == 1)
-	{
-
-	}
+		err = start_tail(DEFAULT, 0, NULL);
+	i = 0;
 	else if (argv[1][0] == '-')
 	{
-		err = valid_option(argc, argv);
+		err = validate_option(&arg);
 	}
 	else
 	{
-		/* code */
+		err = start_tail(DEFAULT, argc - 1, &argv[1]);
 	}
 	
 }

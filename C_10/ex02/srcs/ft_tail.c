@@ -10,25 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+
 #include "ft_tail.h"
 
-int	default_stdin()
+int	open_file(char* fileName)
 {
+	int	fd;
 
+	fd = open(fileName, O_RDONLY);
+	if (fd < 0)
+	{
+		
+	}
 }
 
-int	default_file(char **fileNames)
+int	start_tail(int option, int files, char **fileNames)
 {
+	int	i;
+	int	err;
 
+	err = 0;
+	if (files == 0)
+	{
+
+	}
+	else
+	{
+		i = 0;
+		while (i < files)
+		{
+			err += open_file(fileNames[i]);
+		}
+	}
 }
-
-int	option_cstdin(char **fileNames)
-{
-
-}
-
-int	option_cfile(char **fileNames)
-{
-
-}
-

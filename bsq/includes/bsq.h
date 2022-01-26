@@ -23,6 +23,9 @@
 # define FIELDMF -3
 # define FDLNMF -4
 
+# define GARO 0
+# define SERO 1
+
 typedef struct s_map {
 	int		line;
 	int		len;
@@ -32,13 +35,19 @@ typedef struct s_map {
 	char	**field;
 }			t_map;
 
+typedef struct s_obstacles {
+	int	garo_obstacle_row;
+	int	garo_obstacle_col;
+	int	sero_obstacle_row;
+	int	sero_obstacle_col;
+}		t_obstacles;
+
 typedef struct s_square {
-	int	row;
-	int	col;
-	int	dia;
-	int	row_collide;
-	int	col_collide;
-}		t_square;
+	int			row;
+	int			col;
+	int			dia;
+	t_obstacles	obstacles;
+}				t_square;
 
 int			ft_natoi_positive(char *str, int n);
 char		*ft_string_realloc(char *src, int size, int n);
@@ -58,7 +67,7 @@ int			dia_increase(t_map *map, t_square *square);
 t_square	process_algorithm(t_map *map, char **index_field);
 int			start_algorithm(t_map *map);
 
-void		save_max_collide(int row, int col, t_square *square);
+void		save_max_collide(int row, int col, t_square *square, int direction);
 void		index_passing_zone(t_square square, char **index_field);
 char		**malloc_index_field(t_map *map);
 void		init_square(t_square *square, int row, int col);

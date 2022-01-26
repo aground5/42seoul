@@ -26,7 +26,8 @@ void	fill_map(t_map *map, t_square square)
 		j = square.col;
 		while (j < (square.dia + square.col))
 		{
-			map->field[i][j++] = map->full;
+			map->field[i][j] = map->full;
+			j++;
 		}
 		i++;
 	}
@@ -44,7 +45,7 @@ int	is_empty_space(t_map *map, int dia, t_square *square)
 		if (map->field[square->row + dia][i] == map->obstacle)
 		{
 			ret = 0;
-			save_max_collide(square->row + dia, i, square);
+			save_max_collide(square->row + dia, i, square, GARO);
 		}
 		i++;
 	}
@@ -54,7 +55,7 @@ int	is_empty_space(t_map *map, int dia, t_square *square)
 		if (map->field[i][square->col + dia] == map->obstacle)
 		{
 			ret = 0;
-			save_max_collide(i, square->col + dia, square);
+			save_max_collide(i, square->col + dia, square, SERO);
 		}
 		i++;
 	}
@@ -85,10 +86,10 @@ t_square	process_algorithm(t_map *map, char **index_field)
 
 	max_square.dia = 0;
 	i = -1;
-	while (++i < map->line)
+	while (++i < map->line - max_square.dia)
 	{
 		j = -1;
-		while (++j < map->len)
+		while (++j < map->len - max_square.dia)
 		{
 			if (index_field[i][j] == 'x')
 				continue ;
@@ -108,9 +109,9 @@ int	start_algorithm(t_map *map)
 	char		**index_field;
 
 	index_field = malloc_index_field(map);
-	init_index_field(index_field, map);
 	if (index_field == NULL)
 		return (MALOFL);
+	init_index_field(index_field, map);
 	max_square = process_algorithm(map, index_field);
 	free(index_field[0]);
 	free(index_field);
