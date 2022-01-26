@@ -69,16 +69,14 @@ int	make_field(int fd, t_map *map)
 	int		i;
 	int		errno;
 
-	map->field = (char **)malloc(sizeof(char *) * map->line);
+	map->field = map_field_maker(map->line);
 	if (map->field == NULL)
 		return (FIELDMF);
-	map->field[0] = (char *)malloc(sizeof(char));
-	if (map->field[0] == NULL)
-		return (FDLNMF);
 	errno = field_of_first(fd, map);
 	if (errno != NORMEX)
 		return (errno);
-	map->field[0] = ft_string_realloc(map->field[0], (map->line) * (map->len), (map->len));
+	map->field[0] = ft_string_realloc(map->field[0],
+			(map->line) * (map->len), (map->len));
 	if (map->field[0] == NULL)
 		return (FDLNMF);
 	i = 1;

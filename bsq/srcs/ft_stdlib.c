@@ -53,3 +53,19 @@ char	*ft_string_realloc(char *src, int size, int n)
 	free(src);
 	return (dest);
 }
+
+char	**map_field_maker(int line)
+{
+	char	**ret;
+
+	ret = (char **)malloc(sizeof(char *) * line);
+	if (ret == NULL)
+		return (NULL);
+	ret[0] = (char *)malloc(sizeof(char));
+	if (ret[0] == NULL)
+	{
+		free(ret);
+		return (NULL);
+	}
+	return (ret);
+}
