@@ -65,7 +65,7 @@ int	dia_increase(t_map *map, int row, int col)
 	return (i);
 }
 
-t_square	algorithm_start(t_map *map)
+void algorithm_start(t_map *map)
 {
 	int			i;
 	int			j;
@@ -91,5 +91,4 @@ t_square	algorithm_start(t_map *map)
 		i++;
 	}
 	fill_map(map, max_square);
-	return (max_square);
 }

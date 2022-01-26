@@ -33,7 +33,7 @@ int	ft_natoi_positive(char *str, int n)
 	return (result);
 }
 
-char	*ft_string_realloc(char *src, int size)
+char	*ft_string_realloc(char *src, int size, int n)
 {
 	int		i;
 	char	*dest;
@@ -45,7 +45,7 @@ char	*ft_string_realloc(char *src, int size)
 		return (NULL);
 	}
 	i = 0;
-	while (i < size - 1)
+	while (i < n)
 	{
 		dest[i] = src[i];
 		i++;

@@ -24,7 +24,7 @@ int	field_of_first(int fd, t_map *map)
 	{
 		if (map->field[0][i] != '\n')
 		{
-			map->field[0] = ft_string_realloc(map->field[0], i + 2);
+			map->field[0] = ft_string_realloc(map->field[0], i + 2, i + 1);
 			if (map->field[0] == NULL)
 				return (BCLRLNMF);
 		}
@@ -78,7 +78,7 @@ int	make_field(int fd, t_map *map)
 	errno = field_of_first(fd, map);
 	if (errno != NORMEX)
 		return (errno);
-	map->field[0] = ft_string_realloc(map->field[0], (map->line) * (map->len));
+	map->field[0] = ft_string_realloc(map->field[0], (map->line) * (map->len), (map->len));
 	if (map->field[0] == NULL)
 		return (FDLNMF);
 	i = 1;
