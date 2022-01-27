@@ -20,11 +20,7 @@ void	print_error_msg(int errno, int isLast)
 {
 	if (errno == NORMEX)
 		return ;
-	else if (errno == FILERR)
-		write(1, "File not found.\n", 16);
-	else if (errno == MALOFL)
-		write(1, "Malloc failed.\n", 15);
-	else if (errno == MAPERR)
+	else
 		write(1, "map error\n", 10);
 	if (!isLast)
 		write(1, "\n", 1);
