@@ -36,7 +36,7 @@ int	field_of_first(int fd, t_map *map)
 		i++;
 	}
 	map->len = i;
-	if (map->len <= 0)
+	if (map->len <= 0 || map->field[0][i] != '\n')
 		return (MAPERR);
 	return (NORMEX);
 }

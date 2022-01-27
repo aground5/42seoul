@@ -56,7 +56,6 @@ int	main(int argc, char **argv)
 	arg.argv = argv;	
 	if (argc == 1)
 		err = start_tail(DEFAULT, 0, NULL);
-	i = 0;
 	else if (argv[1][0] == '-')
 	{
 		err = validate_option(&arg);
