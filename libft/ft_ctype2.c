@@ -13,3 +13,17 @@ int	ft_isprint(int c)
 		return (1);
 	return (0);
 }
+
+int	ft_toupper(int c)
+{
+	if (ft_islower(c))
+		return (c - 'a' + 'A');
+	return (c);
+}
+
+int	ft_tolower(int c)
+{
+	if (ft_isupper(c))
+		return (c - 'A' + 'a');
+	return (c);
+}

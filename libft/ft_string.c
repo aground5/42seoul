@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	ret;
 
@@ -10,23 +10,22 @@ int	ft_strlen(char *s)
 	return (ret);
 }
 
-void	*memset(void *s, int c, size_t n)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	void	*ret;
-	int		i;
+	size_t	i;
 
-	ret = s;
 	i = 0;
-	while (i < n)
+	while (i < len)
 	{
-		((char *)s)[i] = (char)c;
+		((char *)b)[i] = (char)c;
 		i++;
 	}
+	return (b);
 }
 
-void	bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)
@@ -36,7 +35,28 @@ void	bzero(void *s, size_t n)
 	}
 }
 
-void	*memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 {
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((char *restrict)dst)[i] = ((const char *restrict)src)[i];
+		i++;
+	}
+	return (dst);
+}
+
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t	i;
 	
+	i = 0;
+	while (i < len)
+	{
+		((char *)dst)[i] = ((const char *)src)[i];
+		i++;
+	}
+	return (dst);
 }
