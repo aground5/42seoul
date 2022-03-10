@@ -6,7 +6,7 @@
 
 void	print_illegal_offset(int argc, char **argv)
 {
-
+	
 }
 
 

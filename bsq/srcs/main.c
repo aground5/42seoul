@@ -21,7 +21,7 @@ void	print_error_msg(int errno, int isLast)
 	if (errno == NORMEX)
 		return ;
 	else
-		write(1, "map error\n", 10);
+		write(2, "map error\n", 10);
 	if (!isLast)
 		write(1, "\n", 1);
 }

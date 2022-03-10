@@ -26,7 +26,7 @@ int	ft_is_sort(int *tab, int length, int(*f)(int, int))
 			else if (mode == 1)
 				return (0);
 		}
-		else
+		else if (f(tab[i - 1], tab[i]) < 0)
 		{
 			if (mode == 0)
 				mode = 1;
