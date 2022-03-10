@@ -6,7 +6,7 @@
 #    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 21:33:23 by sgi               #+#    #+#              #
-#    Updated: 2022/01/25 11:57:10 by sgi              ###   ########.fr        #
+#    Updated: 2022/01/28 16:57:52 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OBJS	= ${SRCS:.c=.o}
 NAME	= bsq
 
 CC	= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 
 RM	= rm -f
 
