@@ -38,10 +38,21 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	len_needle = ft_strlen(needle);
 	while (i < len)
 	{
+		if (haystack[i] == '\x00')
+			break ;
 		if (haystack[i] == needle[0])
 		{
-			j = 0;
-			while (j < )
+			j = 1;
+			while (j < len_needle)
+			{
+				if (haystack[i + j] != needle[j])
+					break ;
+				j++;
+			}
+			if (j == len_needle)
+				return (haystack + i);
 		}
+		i++;
 	}
+	return (0);
 }
