@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <stdlib.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
@@ -55,4 +56,25 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		i++;
 	}
 	return (0);
+}
+
+char *ft_strdup(const char *s1)
+{
+	int			len;
+	char		*dest;
+	char		*ret;
+
+	len = ft_strlen(s1);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	ret = dest;
+	while (*s1)
+	{
+		*dest = *s1;
+		s1++;
+		dest++;
+	}
+	*dest = '\x00';
+	return (ret);
 }

@@ -35,14 +35,14 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < n)
 	{
-		((char *restrict)dst)[i] = ((const char *restrict)src)[i];
+		((char *)dst)[i] = ((const char *)src)[i];
 		i++;
 	}
 	return (dst);
