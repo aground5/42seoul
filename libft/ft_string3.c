@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stdlib.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
@@ -9,7 +8,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (((const unsigned char *)s)[i] == (unsigned char)c)
-			return (s + i);
+			return ((void *)(s + i));
 		i++;
 	}
 	return (0);
@@ -18,12 +17,13 @@ void	*ft_memchr(const void *s, int c, size_t n)
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (i < n)
 	{
 		if (((const unsigned char *)s1)[i] != ((const unsigned char *)s2)[i])
-			return (((const unsigned char *)s1)[i] - ((const unsigned char *)s2)[i]);
+			return (((const unsigned char *)s1)[i] -
+					((const unsigned char *)s2)[i]);
 		i++;
 	}
 	return (0);
@@ -37,6 +37,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	i = 0;
 	len_needle = ft_strlen(needle);
+	if (len_needle == 0)
+		return (haystack);
 	while (i < len)
 	{
 		if (haystack[i] == '\x00')
@@ -51,14 +53,14 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 				j++;
 			}
 			if (j == len_needle)
-				return (haystack + i);
+				return ((char *)(haystack + i));
 		}
 		i++;
 	}
 	return (0);
 }
 
-char *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	int			len;
 	char		*dest;

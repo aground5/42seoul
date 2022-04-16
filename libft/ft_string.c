@@ -2,10 +2,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int	ret;
+	size_t	ret;
 
 	ret = 0;
-	while (*s)
+	while (s[ret])
 		ret++;
 	return (ret);
 }
@@ -52,11 +52,23 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
 
-	i = 0;
-	while (i < len)
+	if (dst < src)
 	{
-		((char *)dst)[i] = ((const char *)src)[i];
-		i++;
+		i = 0;
+		while (i < len)
+		{
+			((char *)dst)[i] = ((const char *)src)[i];
+			i++;
+		}
+	}
+	else
+	{
+		i = len;
+		while (i > 0)
+		{
+			((char *)dst)[i - 1] = ((const char *)src)[i - 1];
+			i--;
+		}
 	}
 	return (dst);
 }

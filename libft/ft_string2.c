@@ -2,16 +2,17 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
+	size_t	len_src;
 
-	i = 0;
-	while (i < dstsize - 1)
+	len_src = ft_strlen(src);
+	if (len_src + 1 < dstsize)
+		ft_memcpy(dst, src, len_src + 1);
+	else if (dstsize != 0)
 	{
-		dst[i] = src[i];
-		i++;
+		ft_memcpy(dst, src, dstsize - 1);
+		dst[dstsize - 1] = '\0';
 	}
-	dst[dstsize] = '\x00';
-	return (ft_strlen(src));
+	return (len_src);
 }
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
@@ -26,7 +27,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		return (dstsize + len_src);
 	i = len_dst;
 	dst += len_dst;
-	while (i < dstsize - 1 && *src != '\x00')
+	while (i < dstsize - 1 && *src)
 	{
 		*dst = *src;
 		i++;
@@ -39,34 +40,31 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t	len;
-	size_t	i;
-
-	len = ft_strlen(s);
-	i = 0;
-	while (i <= len)
+	while (*s)
 	{
-		if (s[i] == c)
-			return (&s[i]);
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
+	if (*s == (char)c)
+		return ((char *)s);
 	return (0);
 }
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char	*ret;
 	size_t	len;
 	size_t	i;
 
-	ret = 0;
 	len = ft_strlen(s);
-	i = 0;
-	while (i <= len)
+	i = len + 1;
+	while (i > 0)
 	{
-		if (s[i] == c)
-			ret = &s[i];
+		if (s[i - 1] == (char)c)
+			return ((char *)(s + i - 1));
+		i--;
 	}
-	return (ret);
+	return (0);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
