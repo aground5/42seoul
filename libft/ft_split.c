@@ -18,7 +18,7 @@ size_t	count_words(const char *str, const char c)
 	size_t	words;
 
 	words = 0;
-	if (*str != c)
+	if (*str != c && *str != '\x00')
 		words++;
 	while (*str != '\x00')
 	{

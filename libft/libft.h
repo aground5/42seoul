@@ -38,6 +38,7 @@ char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_charinset(const char c, char const *set);
+
 char	*ft_strtrim(char const *s1, char const *set);
 
 int		len_int(int n);
@@ -46,13 +47,9 @@ char	*ft_itoa(int n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd_process(int n, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-size_t	ft_strlen_cterminator(const char *s, const char c);
-size_t	count_words(const char *str, const char c);
 char	*ft_strndup(const char *src, size_t len);
-void	on_error(char **split, size_t toBeFree);
 char	**ft_split(char const *s, char c);
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

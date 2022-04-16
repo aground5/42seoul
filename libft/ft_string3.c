@@ -29,31 +29,46 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	return (0);
 }
 
+char	*ft_strnstr2(const char *haystack, const char *needle, \
+						size_t len_needle, size_t len)
+{
+	size_t	j;
+	j = 1;
+	while (j < len_needle)
+	{
+		if (j >= len)
+			break ;
+		if (haystack[j] == '\x00')
+			break ;
+		if (haystack[j] != needle[j])
+			break ;
+		j++;
+	}
+	if (j == len_needle)
+		return ((char *)(haystack));
+	return (0);
+}
+
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
-	size_t	j;
 	size_t	len_needle;
+	char	*ret;
 
 	i = 0;
 	len_needle = ft_strlen(needle);
 	if (len_needle == 0)
-		return (haystack);
+		return ((char *)haystack);
 	while (i < len)
 	{
 		if (haystack[i] == '\x00')
 			break ;
 		if (haystack[i] == needle[0])
 		{
-			j = 1;
-			while (j < len_needle)
-			{
-				if (haystack[i + j] != needle[j])
-					break ;
-				j++;
-			}
-			if (j == len_needle)
-				return ((char *)(haystack + i));
+			ret = ft_strnstr2(haystack + i, needle, \
+								len_needle, len - i);
+			if (ret != 0)
+				return (ret);
 		}
 		i++;
 	}

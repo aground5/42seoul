@@ -10,7 +10,7 @@ int	len_int(int n)
 	while (n != 0)
 	{
 		n /= 10;
-		n++;
+		len++;
 	}
 	return (len);
 }
@@ -20,19 +20,24 @@ char	*ft_itoa(int n)
 	char	*ret;
 	int		i;
 	int		len;
+	int		isminus;
 
+	isminus = 1;
 	len = len_int(n);
 	ret = (char *)malloc((len + 1) * sizeof(char));
 	if (ret == NULL)
 		return (NULL);
 	if (n < 0)
+	{
+		isminus = -1;
 		ret[0] = '-';
+	}
 	else if (n == 0)
 		ret[0] = '0';
 	i = len - 1;
-	while (n != 0 && i > 0)
+	while (n != 0)
 	{
-		ret[i] = n % 10 + '0';
+		ret[i] = (n % 10) * isminus + '0';
 		n /= 10;
 		i--;
 	}

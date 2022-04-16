@@ -18,7 +18,7 @@ int	ft_atoi(const char *str)
 		isminus = -1;
 		i++;
 	}
-	while (str[i] >= 0 && str[i] <= 9)
+	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result *= 10;
 		result += str[i] - '0';
@@ -32,7 +32,5 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*ret;
 
 	ret = malloc(count * size);
-	if (ret == NULL)
-		return (NULL);
 	return (ret);
 }
