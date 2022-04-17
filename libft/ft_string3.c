@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 21:21:08 by sgi               #+#    #+#             */
-/*   Updated: 2022/04/16 21:21:08 by sgi              ###   ########.fr       */
+/*   Updated: 2022/04/17 14:17:05 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strnstr2(const char *haystack, const char *needle, \
 						size_t len_needle, size_t len)
 {
 	size_t	j;
+
 	j = 1;
 	while (j < len_needle)
 	{

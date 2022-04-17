@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/17 14:53:32 by sgi               #+#    #+#             */
+/*   Updated: 2022/04/17 14:53:50 by sgi              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -41,7 +53,6 @@ int		ft_charinset(const char c, char const *set);
 
 char	*ft_strtrim(char const *s1, char const *set);
 
-int		len_int(int n);
 char	*ft_itoa(int n);
 
 void	ft_putchar_fd(char c, int fd);
