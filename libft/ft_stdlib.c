@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 21:21:02 by sgi               #+#    #+#             */
-/*   Updated: 2022/04/16 21:21:02 by sgi              ###   ########.fr       */
+/*   Updated: 2022/04/17 16:03:29 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*ret;
 
 	ret = malloc(count * size);
+	if (ret == NULL)
+		return (NULL);
+	ft_bzero(ret, count * size);
 	return (ret);
 }
