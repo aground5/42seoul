@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 class Node {
 private:
@@ -26,13 +27,21 @@ public:
 		else
 			return (this);
 	}
-	void	print_node()
+	void	inorder_print(std::ofstream &out)
 	{
-		std::cout << get_data() << " ";
 		if (left != NULL)
-			left->print_node();
+			left->inorder_print(out);
+		out << get_data() << " ";
 		if (right != NULL)
-			right->print_node();
+			right->inorder_print(out);
+	}
+	void	preorder_print(std::ofstream &out)
+	{
+		out << get_data() << " ";
+		if (left != NULL)
+			left->preorder_print(out);
+		if (right != NULL)
+			right->preorder_print(out);
 	}
 	void	rotL()
 	{
@@ -62,46 +71,40 @@ public:
 		this->height = 1 + std::max(this->left->get_height(), this->right->get_height());
 		this->parent->height = 1 + std::max(this->get_height(), this->parent->right->get_height());
 	}
-	int	renew_balance(void)
+	int	renew_balance(bool &collapsed)
 	{
 		balance = 0;
 		if (left != NULL)
-			balance -= left->renew_balance();
+			balance -= left->renew_balance(collapsed);
 		if (right != NULL)
-			balance += right->renew_balance();
+			balance += right->renew_balance(collapsed);
+		if (collapsed)
+			return (-1);
 		if (balance <= -2)		// left side
 		{
+			collapsed = true;
 			if (left->left->get_height() > left->right->get_height())
 			{
-				std::cout << "LL" << std::endl;
 				rotL();
 			}
 			else if (left->left->get_height() < left->right->get_height())
 			{
-				std::cout << "LR" << std::endl;
 				left->rotR();
-				get_root()->print_node();
-				std::cout << std::endl;
 				rotL();
 			}
-			else
-				std::cout << "balance collapsed but cannot find causing child." << std::endl;
 		}
 		else if (balance >= 2)		// right side
 		{
+			collapsed = true;
 			if (right->left->get_height() > right->right->get_height())
 			{
-				std::cout << "RL" << std::endl;
 				right->rotL();
 				rotR();
 			}
 			else if (right->left->get_height() < right->right->get_height())
 			{
-				std::cout << "RR" << std::endl;
 				rotR();
 			}
-			else
-				std::cout << "balance collapsed but cannot find causing child." << std::endl;
 		}
 		return (height);
 	}
@@ -119,21 +122,6 @@ public:
 			return (right->find_node(node));
 		return (false);
 	}
-	// int	renew_height(void)
-	// {
-	// 	int	maxHeight;
-
-	// 	maxHeight = 0;
-	// 	if (left != NULL)
-	// 	{
-	// 		int tmp = left->renew_height();
-	// 	}
-	// 	if (right != NULL)
-	// 	{
-	// 		right->renew_height();
-	// 	}
-	// 	height = maxHeight + 1;
-	// }
 	void	increase_height(int childHeight)
 	{
 		if (childHeight >= height)
@@ -218,24 +206,38 @@ void	insert_node(int data, Node *&AVLParent)
 		return ;
 	}
 	Node	*newNode = AVLParent->insert_node(data);
-	AVLParent->renew_balance();
+	bool	balanceCollapsed;
+	do {
+		balanceCollapsed = false;
+		AVLParent->renew_balance(balanceCollapsed);
+	} while (balanceCollapsed);
 	AVLParent = AVLParent->get_root();
-	AVLParent->print_node();
-	std::cout << std::endl;
 }
 
 int main(void)
 {
-	Node *AVLParent = NULL;
-	insert_node(60, AVLParent);
-	insert_node(50, AVLParent);
-	insert_node(20, AVLParent);
-	insert_node(80, AVLParent);
-	insert_node(90, AVLParent);
-	insert_node(70, AVLParent);
-	insert_node(55, AVLParent);
-	insert_node(10, AVLParent);
-	insert_node(40, AVLParent);
-	insert_node(35, AVLParent);
+	Node			*AVLParent = NULL;
+	std::ifstream	in("AVL.in");
+	std::ofstream	out("AVL.out");
+	char	op;
+	int		content;
+	while (true)
+	{
+		in >> op >> content;
+		if (in.eof())
+			break ;
+		if (op == 'I')
+		{
+			insert_node(content, AVLParent);
+			out << "I ";
+			AVLParent->inorder_print(out);
+			out << std::endl;
+			out << "P ";
+			AVLParent->preorder_print(out);
+			out << std::endl << std::endl;
+		}
+	}
+	in.close();
+	out.close();
 	delete AVLParent;
 }
