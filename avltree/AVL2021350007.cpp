@@ -54,8 +54,7 @@ public:
 		set_left(parent->get_right());
 		left->set_parent(this);
 		parent->set_right(this);
-		this->height = 1 + std::max(this->left->get_height(), this->right->get_height());
-		this->parent->height = 1 + std::max(this->get_height(), this->parent->left->get_height());
+		recalibrate_height();
 	}
 	void	rotR()
 	{
@@ -68,8 +67,7 @@ public:
 		set_right(parent->get_left());
 		right->set_parent(this);
 		parent->set_left(this);
-		this->height = 1 + std::max(this->left->get_height(), this->right->get_height());
-		this->parent->height = 1 + std::max(this->get_height(), this->parent->right->get_height());
+		recalibrate_height();
 	}
 	int	renew_balance(bool &collapsed)
 	{
@@ -84,9 +82,7 @@ public:
 		{
 			collapsed = true;
 			if (left->left->get_height() > left->right->get_height())
-			{
 				rotL();
-			}
 			else if (left->left->get_height() < left->right->get_height())
 			{
 				left->rotR();
@@ -102,25 +98,16 @@ public:
 				rotR();
 			}
 			else if (right->left->get_height() < right->right->get_height())
-			{
 				rotR();
-			}
 		}
 		return (height);
 	}
-	bool	find_node(Node *node)
+	void	recalibrate_height(void)
 	{
 		if (this == NULL)
-			return (false);
-		if (this == node)
-			return (true);
-		if (left != NULL && right != NULL)
-			return (left->find_node(node) || right->find_node(node));
-		else if (left != NULL)
-			return (left->find_node(node));
-		else if (right != NULL)
-			return (right->find_node(node));
-		return (false);
+			return ;
+		this->height = 1 + std::max(this->left->get_height(), this->right->get_height());
+		parent->recalibrate_height();
 	}
 	void	increase_height(int childHeight)
 	{
@@ -205,7 +192,7 @@ void	insert_node(int data, Node *&AVLParent)
 		AVLParent = new Node(data);
 		return ;
 	}
-	Node	*newNode = AVLParent->insert_node(data);
+	AVLParent->insert_node(data);
 	bool	balanceCollapsed;
 	do {
 		balanceCollapsed = false;
@@ -221,11 +208,12 @@ int main(void)
 	std::ofstream	out("AVL.out");
 	char	op;
 	int		content;
-	while (true)
+	while (!in.eof())
 	{
-		in >> op >> content;
+		in >> op;
 		if (in.eof())
 			break ;
+		in >> content;
 		if (op == 'I')
 		{
 			insert_node(content, AVLParent);

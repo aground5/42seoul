@@ -41,7 +41,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	return (0);
 }
 
-char	*ft_strnstr2(const char *haystack, const char *needle, \
+static char	*ft_strnstr2(const char *haystack, const char *needle, \
 						size_t len_needle, size_t len)
 {
 	size_t	j;

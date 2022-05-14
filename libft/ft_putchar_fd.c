@@ -28,7 +28,7 @@ void	ft_putendl_fd(char *s, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
-void	ft_putnbr_fd_process(int n, int fd, int isminus)
+static void	ft_putnbr_fd_process(int n, int fd, int isminus)
 {
 	if (n != 0)
 		ft_putnbr_fd_process(n / 10, fd, isminus);

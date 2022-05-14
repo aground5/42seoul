@@ -11,8 +11,10 @@
 # **************************************************************************** #
 
 SRCS = ft_additional.c  ft_ctype.c  ft_ctype2.c  ft_itoa.c  ft_putchar_fd.c  ft_split.c  ft_stdlib.c  ft_string.c  ft_string2.c  ft_string3.c  ft_striteri.c  ft_strmapi.c ft_strtrim.c
+BSRCS = 
 
 OBJS = ${SRCS:.c=.o}
+BOBJS = ${BSRCS:.c=.o}
 
 NAME = libft.a
 
@@ -39,3 +41,5 @@ fclean:	clean
 	${RM} ${NAME}
 
 re:	fclean all
+
+bonus:	
