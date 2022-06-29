@@ -1,0 +1,11 @@
+" 42seoul
+let g:user42 = 'sgi'
+let g:mail42 = 'sgi@student.42seoul.kr'
+
+" Syntax Highlighting
+if has("syntax")
+    syntax on
+endif
+
+set mouse=a
+set tabstop=4 softtabstop=4 expandtab shiftwidth=4

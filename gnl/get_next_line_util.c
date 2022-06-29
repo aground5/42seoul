@@ -1,65 +1,39 @@
 #include "get_next_line.h"
 
-char	*get_one_buffer(int fd)
-{
-	char	*ret;
-
-	ret = (char *)malloc(BUFFER_SIZE + 1);
-	if (ret == NULL)
-		return (NULL);
-	if (read(fd, ret, BUFFER_SIZE) == -1)
-	{
-		free(ret);
-		return (NULL);
-	}
-	ret[BUFFER_SIZE] = '\x00';
-	return (ret);
-}
-
-int	concate_buffer(char *line, char *buf, int *lenLine)
-{
-	int i;
-
-	while (i < BUFFER_SIZE)
-	{
-		if (buf[i] == '\n')
-		{
-			line = 
-		}
-		else if (buf[i] == EOF)
-		{
-			
-		}
-	}
-}
-
-char	*ft_realloc(char *s, int len, int need)
+char	*ft_realloc(char *s, int len, char *concat, int need)
 {
 	char	*ret;
 	int		i;
 
 	ret = (char *)malloc(len + need + 1);
-	if (len == 0)
+	if (ret == NULL || len == 0)
 		return (ret);
+	i = 0;
 	while (i < len)
 	{
 		ret[i] = s[i];
 		i++;
 	}
+	while (i < len + need)
+	{
+		ret[i] = concat[i - len];
+		i++;
+	}
 	free(s);
+	ret[len + need + 1] = '\x00';
 	return (ret);
 }
 
-int	parse_status(char *buf)
+int	index_newline(char *buf)
 {
 	int	i;
 
+	i = 0;
 	while (i < BUFFER_SIZE)
 	{
 		if (buf[i] == '\n')
-			return (1);
-		else if (buf[i] == EOF)
-			return (2);
+			return (i);
+		i++;
 	}
 	return (0);
 }
