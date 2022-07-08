@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:45:35 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/08 13:53:19 by sgi              ###   ########.fr       */
+/*   Updated: 2022/07/08 13:55:09 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,10 @@ int	ft_putchar(int c)
 
 int	ft_putstr(char *s)
 {
-	
+	int	i;
+
+	i = 0;
+	while (s[i] != 0)
+		i += ft_putchar(s[i]);
+	return (i);
 }
