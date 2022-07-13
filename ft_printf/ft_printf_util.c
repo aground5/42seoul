@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:45:35 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/08 17:31:38 by sgi              ###   ########.fr       */
+/*   Updated: 2022/07/13 12:29:11 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	ft_putstr(char *s)
 int ft_putnbr_base(char *base, uint64_t n)
 {
 	if (n == 0)
-		return 
+		return ;
 }
