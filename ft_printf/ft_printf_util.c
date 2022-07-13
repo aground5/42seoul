@@ -6,30 +6,50 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:45:35 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/13 12:29:11 by sgi              ###   ########.fr       */
+/*   Updated: 2022/07/13 14:16:58 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(int c)
+void	ft_putnbr_base_u(char *base, uint32_t nb, int *count)
 {
-	write(1, &c, sizeof(char));
-	return (1);
+	uint32_t	base_num;
+
+	base_num = ft_strlen(base);
+	if (nb >= base_num)
+	{
+		ft_putnbr_base_u(base, nb / base_num, count);
+		nb = nb % base_num;
+	}
+	if (nb < base_num)
+		*count += ft_putchar(base[nb]);
 }
 
-int	ft_putstr(char *s)
+void	ft_putnbr(int32_t nb, int *count)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i += ft_putchar(s[i]);
-	return (i);
+	if (nb < 0 && *count == 0)
+		*count += ft_putchar('-');
+	if (nb <= -10 || nb >= 10)
+	{
+		ft_putnbr(nb / 10, count);
+		nb = nb % 10;
+	}
+	if (nb > -10 && nb < 10)
+	{
+		if (nb < 0)
+			nb = -nb;
+		*count += ft_putchar(nb + 48);
+	}
 }
 
-int ft_putnbr_base(char *base, uint64_t n)
+void	ft_putpnt(uint64_t nb, int *count)
 {
-	if (n == 0)
-		return ;
+	if (nb >= 16)
+	{
+		ft_putpnt(nb / 16, count);
+		nb = nb % 16;
+	}
+	if (nb < 16)
+		*count += ft_putchar("0123456789abcdef"[nb]);
 }
