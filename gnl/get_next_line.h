@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 09:24:47 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/01 09:24:48 by sgi              ###   ########.fr       */
+/*   Updated: 2022/07/13 12:29:48 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct s_status
 {
+	char	*backup;
 	char	buf[BUFFER_SIZE];
 	int		read_bytes;
 	int		toread_bytes;
