@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 12:55:59 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/13 14:06:36 by sgi              ###   ########.fr       */
+/*   Updated: 2022/07/14 21:10:57 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_internal.h"
 
-int	ft_strlen(char *s)
+int	ft_printf_strlen(char *s)
 {
 	int	len;
 
@@ -22,13 +22,13 @@ int	ft_strlen(char *s)
 	return (len);
 }
 
-int	ft_putchar(int c)
+int	ft_printf_putchar(int c)
 {
 	write(1, &c, sizeof(char));
 	return (1);
 }
 
-int	ft_putstr(char *s)
+int	ft_printf_putstr(char *s)
 {
 	int	i;
 
@@ -36,6 +36,6 @@ int	ft_putstr(char *s)
 		s = "(null)";
 	i = 0;
 	while (s[i] != 0)
-		i += ft_putchar(s[i]);
+		i += ft_printf_putchar(s[i]);
 	return (i);
 }
