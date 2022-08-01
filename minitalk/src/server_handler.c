@@ -6,12 +6,13 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:09:10 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/15 14:58:40 by sgi              ###   ########.fr       */
+/*   Updated: 2022/07/15 17:56:35 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server.h"
 #include "ft_printf.h"
+#include <stdio.h>
 
 extern char	*g_str;
 
@@ -56,8 +57,10 @@ void	transmit(int sig, siginfo_t *info, void *uap)
 {
 	static unsigned int	bit;
 	static unsigned int	idx;
+	static unsigned int si_pid;
 
-	ft_printf("[DEBUG] signal %d from pid : %d\n", (int)sig, (int)(info->si_pid));
+	if (si_pid == 0)
+		si_pid = info->si_pid;
 	(void)uap;
 	if (sig == SIGUSR1)
 		add_unset(idx);
@@ -75,10 +78,11 @@ void	transmit(int sig, siginfo_t *info, void *uap)
 			idx = 0;
 			ft_printf("%s\n", g_str);
 			init();
-			kill(info->si_pid, SIGUSR2);
+			kill(si_pid, SIGUSR2);
+			si_pid = 0;
 			return ;
 		}
 		g_str = (char *)ft_realloc(g_str, idx, idx + 1);
 	}
-	kill(info->si_pid, SIGUSR1);
+	kill(si_pid, SIGUSR1);
 }
