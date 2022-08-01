@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
+#    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 11:59:11 by sgi               #+#    #+#              #
-#    Updated: 2022/07/28 17:28:05 by sgi              ###   ########.fr        #
+#    Updated: 2022/08/01 15:56:20 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS = -Wall -Wextra -Werror
 INC = -I./include -I${LIBFTDIR}
 LIB = -L${LIBFTDIR} -lft -lreadline
 
-RM = rm -r
+RM = rm -rf
 MAKE = make -j
 MCDFLAG = -C
 
@@ -52,16 +52,12 @@ clean :
 
 fclean :	clean
 	${RM} ${LIBFT}
-	${RM} ${PRINTF}
 	${RM} ${NAME}
 
 re :	fclean all
 
 ${LIBFT} :
 	${MAKE} ${MCDFLAG} ${LIBFTDIR}
-
-${PRINTF} :
-	${MAKE} ${MCDFLAG} ${PRINTFDIR}
 
 .PHONY : all bonus clean fclean re
 

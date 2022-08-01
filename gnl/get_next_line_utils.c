@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_util.c                               :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 09:24:59 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/01 09:25:00 by sgi              ###   ########.fr       */
+/*   Updated: 2022/08/01 20:39:58 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	gnl_read(int fd, t_status *s)
 
 	bytes = read(fd, s->buf, BUFFER_SIZE);
 	s->read_bytes = 0;
-	if (bytes < BUFFER_SIZE)
+	if ((unsigned int)bytes < BUFFER_SIZE)
 		s->buf[bytes] = EOF;
 	return (bytes);
 }
