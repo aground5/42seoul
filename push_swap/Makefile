@@ -6,7 +6,7 @@
 #    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 20:23:35 by sgi               #+#    #+#              #
-#    Updated: 2022/07/27 20:43:28 by sgi              ###   ########.fr        #
+#    Updated: 2022/08/09 16:45:27 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ BOBJS =
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-INC = -I./include -I${LIBFTDIR}/include -I${PRINTFDIR}/include
+INC = -I./include -I${LIBFTDIR} -I${PRINTFDIR}/include
 LIB = -lft
 
 RM = rm -r

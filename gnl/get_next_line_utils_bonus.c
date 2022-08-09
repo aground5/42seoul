@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:46:44 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/01 21:13:18 by sgi              ###   ########.fr       */
+/*   Updated: 2022/08/08 11:29:40 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,34 @@ char	*ft_strealocat(char *src, char *dst, int start, int end)
 	return (ret);
 }
 
-int	gnl_read(int fd, t_status *s)
+int	gnl_read(t_status *s, t_list *head)
 {
 	int	bytes;
 
-	bytes = read(fd, s->buf, BUFFER_SIZE);
+	bytes = read(s->fd, s->buf, BUFFER_SIZE);
 	s->read_bytes = 0;
-	if ((unsigned int)bytes < BUFFER_SIZE)
+	if (bytes == -1 || bytes == 0)
+		free_status_list(s->fd, head);
+	else if ((unsigned int)bytes < BUFFER_SIZE)
 		s->buf[bytes] = EOF;
 	return (bytes);
+}
+
+void	free_status_list(int fd, t_list *head)
+{
+	t_list	*prev;
+	t_list	*index;
+
+	prev = head;
+	index = head->next;
+	while (index != NULL)
+	{
+		if (index->s->fd == fd)
+			break ;
+		prev = index;
+		index = index->next;
+	}
+	prev->next = index->next;
+	free(index->s);
+	free(index);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:46:18 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/01 21:15:32 by sgi              ###   ########.fr       */
+/*   Updated: 2022/08/02 18:44:28 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,16 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+char		*get_next_line(int fd);
+int			process_buffer_to_line(char **ret, t_status *s, t_list *head);
 t_status	*status_by_fd(int fd, t_list *head);
+t_list		*alloc_status_list(int fd);
+void		copy_buffer(char *src, char *dst);
+
 int			find_newline(t_status *s);
 int			ft_strlen(char *s);
 char		*ft_strealocat(char *src, char *dst, int start, int end);
-int			gnl_read(int fd, t_status *s);
-char		*get_next_line(int fd);
+int			gnl_read(t_status *s, t_list *head);
+void		free_status_list(int fd, t_list *head);
 
 #endif
