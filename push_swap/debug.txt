@@ -33,100 +33,100 @@ end: 8
 13
 30
 9
-8
 10
-size: 5
-start: 4
-end: 8
-[b]
-4
-3
-1
-2
 size: 4
 start: 5
 end: 8
-[q]
-13
-30
-9
+[b]
+4
 8
-10
+3
+1
+2
 size: 5
 start: 4
 end: 8
---------------------
-[a]
-13
-30
-10
-size: 3
-start: 6
-end: 8
-[b]
-8
-9
-4
-3
-1
-2
-size: 6
-start: 3
-end: 8
 [q]
 13
 30
+9
 10
-size: 3
-start: 6
+size: 4
+start: 5
 end: 8
 --------------------
 [a]
-13
 30
-size: 2
-start: 7
-end: 8
-[b]
-10
-8
-9
-4
-3
-1
-2
-size: 7
-start: 2
-end: 8
-[q]
-13
-30
-size: 2
-start: 7
-end: 8
---------------------
-[a]
-13
-30
-size: 2
-start: 7
-end: 8
-[b]
-10
-8
-9
-4
-3
-1
-2
-size: 7
-start: 2
-end: 8
-[q]
-10
 size: 1
+start: 8
+end: 8
+[b]
+10
+9
+13
+4
+8
+3
+1
+2
+size: 8
+start: 1
+end: 8
+[q]
+30
+size: 1
+start: 8
+end: 8
+--------------------
+[a]
+30
+size: 1
+start: 8
+end: 8
+[b]
+10
+9
+13
+4
+8
+3
+1
+2
+size: 8
+start: 1
+end: 8
+[q]
+10
+9
+13
+size: 3
+start: 1
+end: 3
+--------------------
+mid: 10
+[a]
+13
+30
+size: 2
+start: 7
+end: 8
+[b]
+10
+9
+4
+8
+3
+1
+2
+size: 7
 start: 2
-end: 2
+end: 8
+[q]
+10
+9
+size: 2
+start: 2
+end: 3
 --------------------
 [a]
 10
@@ -136,9 +136,9 @@ size: 3
 start: 6
 end: 8
 [b]
-8
 9
 4
+8
 3
 1
 2
@@ -146,35 +146,156 @@ size: 6
 start: 3
 end: 8
 [q]
-8
-9
-size: 2
-start: 3
-end: 4
+13
+size: 1
+start: 7
+end: 7
 --------------------
 [a]
-9
 10
 13
 30
-size: 4
-start: 5
+size: 3
+start: 6
 end: 8
 [b]
-8
+9
 4
+8
+3
+1
+2
+size: 6
+start: 3
+end: 8
+[q]
+4
+8
 3
 1
 2
 size: 5
 start: 4
 end: 8
-[q]
+--------------------
+mid: 3
+[a]
 4
+9
+10
+13
+30
+size: 5
+start: 4
+end: 8
+[b]
+8
 3
 1
 2
 size: 4
 start: 5
+end: 8
+[q]
+3
+1
+2
+size: 3
+start: 6
+end: 8
+--------------------
+mid: 2
+[a]
+8
+4
+9
+10
+13
+30
+size: 6
+start: 3
+end: 8
+[b]
+3
+1
+2
+size: 3
+start: 6
+end: 8
+[q]
+1
+2
+size: 2
+start: 7
+end: 8
+--------------------
+[a]
+3
+8
+4
+9
+10
+13
+30
+size: 7
+start: 2
+end: 8
+[b]
+2
+1
+size: 2
+start: 7
+end: 8
+[q]
+8
+size: 1
+start: 3
+end: 3
+--------------------
+[a]
+3
+8
+4
+9
+10
+13
+30
+size: 7
+start: 2
+end: 8
+[b]
+2
+1
+size: 2
+start: 7
+end: 8
+[q]
+4
+9
+size: 2
+start: 4
+end: 5
+--------------------
+[a]
+3
+8
+4
+9
+10
+13
+30
+size: 7
+start: 2
+end: 8
+[b]
+2
+1
+size: 2
+start: 7
+end: 8
+[q]
+30
+size: 1
+start: 8
 end: 8
 --------------------
