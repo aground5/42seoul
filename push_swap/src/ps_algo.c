@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:25:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 21:14:51 by sgi              ###   ########.fr       */
+/*   Updated: 2022/08/28 21:19:45 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,20 +135,10 @@ int	get_median(int *array, int start, int end)
 	sorted = (int *)malloc(len_sorted);
 	if (sorted == NULL)
 		exit(-1);
-	ft_memcpy(sorted, &array[start], (len_sorted - 1) * sizeof(int) + 1);
+	ps_intarrcpy(sorted, &array[start], len_sorted);
 	quick_sort(sorted, 0, len_sorted - 1);
 	ret = sorted[len_sorted / 2];
 	free(sorted);
 	ft_printf("len: %d   |    mid: %d\n", len_sorted, ret);
 	return (ret);
-}
-
-void	algo_struct_init(t_queue *a, t_queue *b, int size)
-{
-	a->start = 0;
-	a->end = size - 1;
-	a->size = size;
-	b->start = size;
-	b->end = size - 1;
-	b->size = 0;
 }

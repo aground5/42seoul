@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:05:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 13:23:41 by sgi              ###   ########.fr       */
+/*   Updated: 2022/08/28 21:19:57 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	algo_init(int *a_arr, int size);
 void	algo_atob(t_queue *a, t_queue *b, t_queue *q);
 void	algo_btoa(t_queue *a, t_queue *b, t_queue *q);
 int		get_median(int *array, int start, int end);
+
 void	algo_struct_init(t_queue *a, t_queue *b, int size);
+void	ps_intarrcpy(int *dst, const int *src, int n);
 
 #endif
