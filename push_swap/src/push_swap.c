@@ -22,6 +22,7 @@ void	print_op(char **log)
 		ft_printf("%s\n", log[i]);
 		i++;
 	}
+	free(log);
 }
 
 int	main(int argc, char **argv)

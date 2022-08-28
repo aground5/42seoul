@@ -132,7 +132,7 @@ int	get_median(int *array, int start, int end)
 	if (start >= end)
 		exit(-2);
 	len_sorted = end - start + 1;
-	sorted = (int *)malloc(len_sorted);
+	sorted = (int *)malloc(len_sorted * sizeof(int));
 	if (sorted == NULL)
 		exit(-1);
 	ps_intarrcpy(sorted, &array[start], len_sorted);
