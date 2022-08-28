@@ -1,0 +1,180 @@
+[a]
+2
+1
+13
+3
+30
+9
+8
+4
+10
+size: 9
+start: 0
+end: 8
+[b]
+size: 0
+start: 9
+end: 8
+[q]
+2
+1
+13
+3
+30
+9
+8
+4
+10
+size: 9
+start: 0
+end: 8
+--------------------
+[a]
+13
+30
+9
+8
+10
+size: 5
+start: 4
+end: 8
+[b]
+4
+3
+1
+2
+size: 4
+start: 5
+end: 8
+[q]
+13
+30
+9
+8
+10
+size: 5
+start: 4
+end: 8
+--------------------
+[a]
+13
+30
+10
+size: 3
+start: 6
+end: 8
+[b]
+8
+9
+4
+3
+1
+2
+size: 6
+start: 3
+end: 8
+[q]
+13
+30
+10
+size: 3
+start: 6
+end: 8
+--------------------
+[a]
+13
+30
+size: 2
+start: 7
+end: 8
+[b]
+10
+8
+9
+4
+3
+1
+2
+size: 7
+start: 2
+end: 8
+[q]
+13
+30
+size: 2
+start: 7
+end: 8
+--------------------
+[a]
+13
+30
+size: 2
+start: 7
+end: 8
+[b]
+10
+8
+9
+4
+3
+1
+2
+size: 7
+start: 2
+end: 8
+[q]
+10
+size: 1
+start: 2
+end: 2
+--------------------
+[a]
+10
+13
+30
+size: 3
+start: 6
+end: 8
+[b]
+8
+9
+4
+3
+1
+2
+size: 6
+start: 3
+end: 8
+[q]
+8
+9
+size: 2
+start: 3
+end: 4
+--------------------
+[a]
+9
+10
+13
+30
+size: 4
+start: 5
+end: 8
+[b]
+8
+4
+3
+1
+2
+size: 5
+start: 4
+end: 8
+[q]
+4
+3
+1
+2
+size: 4
+start: 5
+end: 8
+--------------------
