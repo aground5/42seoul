@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:25:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 21:01:10 by sgi              ###   ########.fr       */
+/*   Updated: 2022/08/28 21:14:51 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	algo_atob(t_queue *a, t_queue *b, t_queue *q)
 	i = q->start;
 	while (i <= q->end)
 	{
-		if (q->arr[q->start] <= mid)
+		if (q->arr[q->start] < mid)
 			ps_pb(a, b, q);
 		else
 			ps_ra(q);
@@ -106,7 +106,6 @@ void	algo_btoa(t_queue *a, t_queue *b, t_queue *q)
 		return ;
 	}
 	mid = get_median(q->arr, q->start, q->end);
-	ft_printf("mid: %d\n", mid);
 	i = q->start;
 	while (i <= q->end)
 	{
@@ -136,10 +135,11 @@ int	get_median(int *array, int start, int end)
 	sorted = (int *)malloc(len_sorted);
 	if (sorted == NULL)
 		exit(-1);
-	ft_memcpy(sorted, &array[start], (len_sorted) * sizeof(int));
+	ft_memcpy(sorted, &array[start], (len_sorted - 1) * sizeof(int) + 1);
 	quick_sort(sorted, 0, len_sorted - 1);
 	ret = sorted[len_sorted / 2];
 	free(sorted);
+	ft_printf("len: %d   |    mid: %d\n", len_sorted, ret);
 	return (ret);
 }
 
