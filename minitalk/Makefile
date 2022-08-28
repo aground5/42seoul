@@ -97,5 +97,5 @@ ${PRINTF} :
 
 .PHONY:	all clean fclean re bonus mclean bclean
 
-%o : %c
+%.o : %.c
 	${CC} ${CFLAGS} -c $< -o $@ ${INC}

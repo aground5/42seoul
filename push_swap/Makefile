@@ -20,7 +20,7 @@ BOBJS =
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 INC = -I./include -I${LIBFTDIR} -I${PRINTFDIR}/include
-LIB = -lft -L${LIBFTDIR} -lftprintf -L${PRINTFDIR}
+LIB = -L${LIBFTDIR} -lft -L${PRINTFDIR} -lftprintf
 
 RM = rm -rf
 MAKE = make -j
@@ -41,7 +41,7 @@ else
 endif
 
 ${NAME} :	${LIBFT} ${PRINTF} ${OBJS}
-	${CC} ${CFLAGS} ${LIB} -o $@ ${OBJS}
+	${CC} ${CFLAGS} -o $@ ${OBJS} ${LIB}
 
 all :	${NAME}
 
@@ -68,5 +68,5 @@ ${PRINTF} :
 
 .PHONY : all bonus clean fclean re
 
-%o : %c
+%.o : %.c
 	${CC} ${CFLAGS} -c $< -o $@ ${INC}

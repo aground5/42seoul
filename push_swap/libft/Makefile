@@ -39,5 +39,5 @@ re:	fclean all
 
 .PHONY: all clean fclean re
 
-%o : %c 
+%.o : %.c 
 	${CC} ${CFLAGS} -c $< -o $@ ${INC}
