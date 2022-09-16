@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:05:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 21:19:57 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/17 03:05:42 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 
 typedef struct	s_queue
 {
-	int			*arr;
-	int			size;
-	int			start;
-	int			end;
-}				t_queue;
+	int				*arr;
+	int				size;
+	int				start;
+	int				end;
+	struct s_queue	*parent;
+}					t_queue;
 
 int		*validate_arguements(int argn, char **argv);
 int		push_swap_atoi(char *s);
@@ -47,11 +48,12 @@ void	ps_rrb(t_queue *b);
 void	quick_sort(int *arr, int low, int high);
 
 void	algo_init(int *a_arr, int size);
-void	algo_atob(t_queue *a, t_queue *b, t_queue *q);
-void	algo_btoa(t_queue *a, t_queue *b, t_queue *q);
+void	proceed_push_swap_ascend(t_queue *a, t_queue *b, t_queue *q);
+void	proceed_push_swap_descend(t_queue *a, t_queue *b, t_queue *q);
 int		get_median(int *array, int start, int end);
 
 void	algo_struct_init(t_queue *a, t_queue *b, int size);
 void	ps_intarrcpy(int *dst, const int *src, int n);
+bool	is_sorted(bool ascending, t_queue *q);
 
 #endif

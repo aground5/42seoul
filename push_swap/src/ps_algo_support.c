@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_algo_support.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 21:18:03 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 21:19:36 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/17 03:07:17 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,30 @@ void	ps_intarrcpy(int *dst, const int *src, int n)
 		dst[i] = src[i];
 		i++;
 	}
+}
+
+bool	is_sorted(bool ascending, t_queue *q)
+{
+	int	i;
+
+	i = q->start;
+	if (ascending)
+	{
+		while (i <= q->end - 1)
+		{
+			if (q->arr[i] > q->arr[i + 1])
+				return (false);
+			i++;
+		}
+	}
+	else
+	{
+		while (i <= q->end - 1)
+		{
+			if (q->arr[i] < q->arr[i + 1])
+				return (false);
+			i++;
+		}
+	}
+	return (true);
 }
