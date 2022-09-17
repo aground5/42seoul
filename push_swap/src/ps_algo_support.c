@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 21:18:03 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/17 03:07:17 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/17 11:32:22 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,25 @@ void	ps_intarrcpy(int *dst, const int *src, int n)
 	}
 }
 
-bool	is_sorted(bool ascending, t_queue *q)
+bool	is_sorted(bool ascending, t_ext_queue *q)
 {
 	int	i;
 
-	i = q->start;
+	i = q->queue.start;
 	if (ascending)
 	{
-		while (i <= q->end - 1)
+		while (i <= q->queue.end - 1)
 		{
-			if (q->arr[i] > q->arr[i + 1])
+			if (q->queue.arr[i] > q->queue.arr[i + 1])
 				return (false);
 			i++;
 		}
 	}
 	else
 	{
-		while (i <= q->end - 1)
+		while (i <= q->queue.end - 1)
 		{
-			if (q->arr[i] < q->arr[i + 1])
+			if (q->queue.arr[i] < q->queue.arr[i + 1])
 				return (false);
 			i++;
 		}
