@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:44:24 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/15 18:48:53 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/21 16:52:45 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	display_pid(void)
 
 static void	init(void)
 {
-	free(g_str);
 	g_str = (char *)malloc(1);
 	if (g_str == NULL)
 		exit(1);
@@ -33,12 +32,12 @@ int	main(void)
 {
 	struct sigaction	act;
 
+	init();
 	act.sa_sigaction = &transmit;
 	act.sa_flags = SA_SIGINFO;
 	display_pid();
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
-	init();
 	while (1)
 	{
 		continue ;

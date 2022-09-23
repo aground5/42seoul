@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   server_handler_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:09:10 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/15 18:20:32 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/23 22:37:39 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "server_bonus.h"
 #include "ft_printf.h"
-#include <stdio.h>
 
 extern char	*g_str;
 
@@ -42,11 +41,16 @@ static void	*ft_realloc(char *src, int src_len, int ret_len)
 		((char *)ret)[i] = src[i];
 		i++;
 	}
+	free(src);
 	return (ret);
 }
 
-static void	init(void)
+static void	finit(unsigned int *idx, pid_t *si_pid)
 {
+	*idx = 0;
+	ft_printf("%s\n", g_str);
+	kill(*si_pid, SIGUSR2);
+	*si_pid = 0;
 	free(g_str);
 	g_str = (char *)malloc(1);
 	if (g_str == NULL)
@@ -57,17 +61,15 @@ void	transmit(int sig, siginfo_t *info, void *uap)
 {
 	static unsigned int	bit;
 	static unsigned int	idx;
-	static unsigned int si_pid;
+	static pid_t		si_pid;
 
-	if (si_pid == 0)
+	if (si_pid == 0 || (info->si_pid != 0 && info->si_pid != si_pid))
 		si_pid = info->si_pid;
 	(void)uap;
 	if (sig == SIGUSR1)
 		add_unset(idx);
 	else if (sig == SIGUSR2)
 		add_set(idx);
-	else
-		return ;
 	bit++;
 	if (bit >= 8)
 	{
@@ -75,11 +77,7 @@ void	transmit(int sig, siginfo_t *info, void *uap)
 		idx++;
 		if (g_str[idx - 1] == '\x00')
 		{
-			idx = 0;
-			ft_printf("%s\n", g_str);
-			init();
-			kill(si_pid, SIGUSR2);
-			si_pid = 0;
+			finit(&idx, &si_pid);
 			return ;
 		}
 		g_str = (char *)ft_realloc(g_str, idx, idx + 1);

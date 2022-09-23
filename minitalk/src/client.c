@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:03:14 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/15 17:40:25 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/23 22:20:34 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,10 @@ static void	send_str(int pid, char *str)
 				g_receivable = 0;
 				j++;
 				if ((c & 0b10000000) == 0b00000000)
-				{
-					c = c << 1;
 					kill(pid, SIGUSR1);
-				}
-				else if ((c & 0b10000000) == 0b10000000)
-				{
-					c = c << 1;
+				else
 					kill(pid, SIGUSR2);
-				}
+				c = c << 1;
 			}
 		}
 		i++;
@@ -72,7 +67,7 @@ static void	send_terminator(int pid)
 	}
 }
 
-static void custom_exit(int sig)
+static void	custom_exit(int sig)
 {
 	(void)sig;
 	exit(0);
@@ -92,7 +87,7 @@ int	main(int argc, char **argv)
 	send_terminator(pid);
 	while (1)
 	{
-		continue;
+		continue ;
 	}
 	return (0);
 }
