@@ -6,13 +6,13 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:25:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/17 14:23:49 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/24 17:24:22 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	g_single_param = 250;
+int	g_single_param = 6;
 
 void	print_queue(t_queue *queue)
 {
@@ -78,6 +78,54 @@ void	proceed_push_swap_ascend(t_queue *a, t_queue *b, t_ext_queue q)
 		{
 			ps_sa(a);
 			log_queue(a, b, &q);
+		}
+		return ;
+	}
+	if (q.queue.size == 3)
+	{
+		if (q.queue.arr[q.queue.start] < q.queue.arr[q.queue.start + 1])
+		{
+			if (q.queue.arr[q.queue.start + 1] < q.queue.arr[q.queue.start + 2])
+				return ;
+			else
+			{
+				if (q.queue.arr[q.queue.start] < q.queue.arr[q.queue.start + 2])
+				{
+					ps_ra(a, true);
+					ps_sa(a);
+					ps_rra(a);
+				}
+				else
+				{
+					ps_ra(a, true);
+					ps_sa(a);
+					ps_rra(a);
+					ps_sa(a);
+				}
+			}
+		}
+		else
+		{
+			if (q.queue.arr[q.queue.start + 1] < q.queue.arr[q.queue.start + 2])
+			{
+				if (q.queue.arr[q.queue.start] < q.queue.arr[q.queue.start + 2])
+					ps_sa(a);
+				else
+				{
+					ps_sa(a);
+					ps_ra(a, true);
+					ps_sa(a);
+					ps_rra(a);
+				}
+			}
+			else
+			{
+				ps_sa(a);
+				ps_ra(a, true);
+				ps_sa(a);
+				ps_rra(a);
+				ps_sa(a);
+			}
 		}
 		return ;
 	}
@@ -245,3 +293,5 @@ void	get_single_pivot(t_ext_queue *q)
 	q->end = q->queue.size - q->first;
 	free(sorted);
 }
+
+

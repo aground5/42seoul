@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 17:30:43 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 13:38:43 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/24 18:41:55 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,62 @@ char	**ps_log_move(char *op)
 		size_log++;
 	}
 	log[size_log - 1] = op;
+	return (log);
+}
+
+char	**ps_optimize_move(void)
+{
+	char	**log;
+	t_list	head;
+	t_list	*prev;
+	t_list	*tmp;
+	int		i;
+	
+	log = ps_log_move(NULL);
+	head.next = (t_list *)ft_calloc(1, sizeof(t_list));
+	head.next->content = log[0];
+	i = 1;
+	while (log[i])
+	{
+		if ((ft_strncmp(head.next->content, "pa", 2) == 0 && \
+		 ft_strncmp("pb", log[i], 2) == 0) || \
+		(ft_strncmp(head.next->content, "pb", 2) == 0 && \
+		 ft_strncmp("pa", log[i], 2) == 0))
+		{
+			tmp = head.next->next;
+			free(head.next);
+			head.next = tmp;
+		}
+		else
+		{
+			tmp = head.next;
+			head.next = (t_list *)calloc(1, sizeof(t_list));
+			if (head.next == NULL)
+				exit(-1);
+			head.next->next = tmp;
+			head.next->content = log[i];
+		}
+		i++;
+	}
+	tmp = &head;
+	i = 0;
+	while (tmp->next != NULL)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	free(log);
+	log = (char **)ft_calloc(i + 1, sizeof(char **));
+	tmp = &head;
+	i--;
+	while (tmp->next != NULL)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+		if (prev != &head)
+			free (prev);
+		log[i] = tmp->content;
+		i--;
+	}
 	return (log);
 }

@@ -5,22 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/27 20:23:35 by sgi               #+#    #+#              #
-#    Updated: 2022/09/24 18:42:55 by sgi              ###   ########.fr        #
+#    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
+#    Updated: 2022/09/25 08:24:35 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = fractol
 
-MSRCS = ./src/push_swap.c ./src/ps_tools.c ./src/ps_algo.c ./src/ps_algo_tools.c ./src/ps_algo_tools2.c ./src/quicksort.c ./src/ps_algo_support.c
+MSRCS = ./src/fractol.c
 MOBJS = ${MSRCS:.c=.o}
 BSRCS = 
-BOBJS = 
+BOBJS = ${BSRCS:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror# -g3 -fsanitize=address
-INC = -I./include -I${LIBFTDIR} -I${PRINTFDIR}/include
-LIB = -L${LIBFTDIR} -lft -L${PRINTFDIR} -lftprintf
+CFLAGS =# -Wall -Wextra -Werror# -g3 -fsanitize=address
+INC = -I./include -I${LIBFTDIR} -I${MLXDIR} -I${MLXCSTMDIR}
+LIB = -L${LIBFTDIR} -L${MLXDIR} -lft -lmlx
 
 RM = rm -rf
 MAKE = make -j
@@ -29,8 +29,9 @@ MCDFLAG = -C
 LIBFTDIR = ./libft
 LIBFT = ${LIBFTDIR}/libft.a
 
-PRINTFDIR = ./ft_printf
-PRINTF = ${PRINTFDIR}/libftprintf.a
+MLXCSTMDIR = ./minilibx_opengl_custom
+MLXDIR = ./minilibx_opengl
+MLX = ${MLXDIR}/libmlx.a
 
 ifndef BONUS
 	SRCS = ${MSRCS}
@@ -40,8 +41,8 @@ else
 	OBJS = ${BOBJS}
 endif
 
-${NAME} :	${LIBFT} ${PRINTF} ${OBJS}
-	${CC} ${CFLAGS} -o $@ ${OBJS} ${LIB}
+${NAME} :	${LIBFT} ${MLX} ${OBJS}
+	${CC} -framework OpenGL -framework AppKit ${LIB} -o $@ ${OBJS}
 
 all :	${NAME}
 
@@ -51,11 +52,10 @@ bonus :
 clean :
 	${RM} ${OBJS}
 	${MAKE} ${MCDFLAG} ${LIBFTDIR} clean
-	${MAKE} ${MCDFLAG} ${PRINTFDIR} clean
+	${MAKE} ${MCDFLAG} ${MLXCSTMDIR} clean
 
 fclean :	clean
 	${RM} ${LIBFT}
-	${RM} ${PRINTF}
 	${RM} ${NAME}
 
 re :	fclean all
@@ -63,8 +63,8 @@ re :	fclean all
 ${LIBFT} :
 	${MAKE} ${MCDFLAG} ${LIBFTDIR}
 
-${PRINTF} :
-	${MAKE} ${MCDFLAG} ${PRINTFDIR}
+${MLX} :
+	${MAKE} ${MCDFLAG} ${MLXCSTMDIR}
 
 .PHONY : all bonus clean fclean re
 

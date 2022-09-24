@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:42:04 by sgi               #+#    #+#             */
-/*   Updated: 2022/08/28 14:20:41 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/24 18:26:17 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	algo_init(a, argc - 1);
-	print_op(ps_log_move(NULL));
+	print_op(ps_optimize_move());
 	return (0);
 }
 

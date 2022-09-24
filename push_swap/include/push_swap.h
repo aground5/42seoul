@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:05:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/17 13:47:09 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/24 18:27:31 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ bool	is_duplicated(int *arr, int size);
 bool	ft_atoi_strictform_overflow(int n, char *s);
 int 	ft_abs(int n);
 char	**ps_log_move(char *op);
+char	**ps_optimize_move(void);
 
 void	ps_pa(t_queue *a, t_queue *b, t_ext_queue *q);
 void	ps_pb(t_queue *a, t_queue *b, t_ext_queue *q);
