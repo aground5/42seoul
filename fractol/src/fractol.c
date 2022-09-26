@@ -6,11 +6,11 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:06 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/25 08:28:08 by sgi              ###   ########.fr       */
+/*   Updated: 2022/09/26 21:07:52 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../include/fractol.h"
 
 int rgb_to_int(double r, double g, double b)
 {
@@ -42,11 +42,22 @@ int draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, 
 	}
 }
 
+
 int main(void)
 {
-	void	*mlx = mlx_init();
-	void	*win = mlx_new_window(mlx, 640, 360, "Tutorial Window");
-	draw_line(mlx, win, 640, 360, 0, 0, rgb_to_int(200, 100, 200));
+	void		*mlx = mlx_init();
+	void		*win = mlx_new_window(mlx, 1280, 360, "Tutorial Window");
+	t_program	prog;
+	t_canvas	canvas;
+
+	canvas.image = mlx_new_image(mlx, 1280, 360);
+	canvas.buffer = mlx_get_data_addr(canvas.image, \
+	&canvas.pixel_bits, &canvas.line_bytes, &canvas.endian);
+	prog.mlx = mlx;
+	prog.win = win;
+	prog.canvas = &canvas;
+	// draw_line(mlx, win, 640, 360, 0, 0, rgb_to_int(200, 100, 200));
+	mlx_mouse_hook(win, &mouse_event, &prog);
     mlx_loop(mlx);
 	return (0);
 }

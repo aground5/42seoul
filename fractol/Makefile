@@ -6,13 +6,13 @@
 #    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/09/25 08:24:35 by sgi              ###   ########.fr        #
+#    Updated: 2022/09/26 21:14:23 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-MSRCS = ./src/fractol.c
+MSRCS = ./src/fractol.c ./src/mouse_event.c
 MOBJS = ${MSRCS:.c=.o}
 BSRCS = 
 BOBJS = ${BSRCS:.c=.o}
