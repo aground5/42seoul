@@ -6,19 +6,19 @@
 #    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/09/26 21:14:23 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/20 16:38:31 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-MSRCS = ./src/fractol.c ./src/mouse_event.c
+MSRCS = ./src/fractol.c ./src/hardware_hook.c ./src/mandelbrot.c ./src/fractol_tools.c ./src/fractol_math.c
 MOBJS = ${MSRCS:.c=.o}
 BSRCS = 
 BOBJS = ${BSRCS:.c=.o}
 
 CC = cc
-CFLAGS =# -Wall -Wextra -Werror# -g3 -fsanitize=address
+CFLAGS = -g
 INC = -I./include -I${LIBFTDIR} -I${MLXDIR} -I${MLXCSTMDIR}
 LIB = -L${LIBFTDIR} -L${MLXDIR} -lft -lmlx
 
