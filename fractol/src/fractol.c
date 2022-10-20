@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:06 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/20 16:40:24 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/20 18:03:22 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	fractol_draw(t_program *prog, int max_iter)
 	int i = 0;
 	long double color;
 
-	iterCount = (int **)malloc(sizeof(int *) * prog->resol.height);
-	iterCount[0] = (int *)malloc(sizeof(int) * prog->resol.width * prog->resol.height);
+	iterCount = (int **)ft_calloc(prog->resol.height, sizeof(int *));
+	iterCount[0] = (int *)ft_calloc(prog->resol.width * prog->resol.height, sizeof(int));
 	i = 1;
 	while (i < prog->resol.height)
 	{
 		iterCount[i] = iterCount[i - 1] + prog->resol.width;
 		i++;
 	}
-	numIterationsPerPixel = (int *)malloc(sizeof(int) * max_iter);
+	numIterationsPerPixel = (int *)ft_calloc(max_iter + 1, sizeof(int));
 	py = 0;
 	while (py < prog->resol.height)
 	{
@@ -66,10 +66,11 @@ void	fractol_draw(t_program *prog, int max_iter)
 	}
 	printf("numIterationsPerPixel calc\n");
 	int total = 0;
-	for (i = 0; i < max_iter; i++)
+	for (i = 0; i <= max_iter; i++)
 	{
 		total += numIterationsPerPixel[i];
 	}
+	printf("\n");
 	printf("total calc\n");
 	py = 0;
 	while (py < prog->resol.height)
@@ -81,7 +82,7 @@ void	fractol_draw(t_program *prog, int max_iter)
 			color = 0;
 			while (i <= iterCount[py][px])
 			{
-				color += ((long double)numIterationsPerPixel[i] / (long double)total) * (long double)0xFFFFFF;
+				color += ((long double)numIterationsPerPixel[i] / (long double)total) * 0xFFFFFF;
 				i++;
 			}
 			put_pixel(px, py, prog, color);
@@ -101,14 +102,22 @@ void	fractol_draw(t_program *prog, int max_iter)
 
 int	fractol_upscale_draw(t_program *prog)
 {
-	int	max_iter_arr[5] = {10, 100, 500, 1000, 10000};
+	int	max_iter_arr[4] = {10, 100, 200, 500};
+	static int	tic;
 	static int	i;
 
-	if (i < 5)
+	if (tic > 20)
 	{
-		fractol_draw(&prog, max_iter_arr[i]);
-		i++;
+		if (i < 4)
+		{
+			fractol_draw(prog, max_iter_arr[i]);
+			i++;
+		}
+		tic = 0;
 	}
+	else
+		tic++;
+	return (true);
 }
 
 int main(void)
@@ -116,8 +125,7 @@ int main(void)
 	t_program	prog;
 
 	fractol_init(&prog);
-	fractol_draw(&prog, 100);
-	// mlx_loop_hook(prog.mlx, fractol_upscale_draw, &prog);
+	mlx_loop_hook(prog.mlx, fractol_upscale_draw, &prog);
 	mlx_hook(prog.win, 17, 1L<<0, window_destroyed, &prog);
 	mlx_key_hook(prog.win, key_hook, &prog);
     mlx_loop(prog.mlx);

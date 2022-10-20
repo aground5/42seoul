@@ -6,7 +6,7 @@
 #    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/10/20 16:38:31 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/20 17:21:01 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ BSRCS =
 BOBJS = ${BSRCS:.c=.o}
 
 CC = cc
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror
 INC = -I./include -I${LIBFTDIR} -I${MLXDIR} -I${MLXCSTMDIR}
 LIB = -L${LIBFTDIR} -L${MLXDIR} -lft -lmlx
 

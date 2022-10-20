@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:08 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/20 15:54:15 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/20 17:52:27 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,9 @@ t_ldpoint	conv_pixel_coord(t_program *prog, int x, int y);
 // fractol_tools.c
 void		mlx_exit(t_program *prog);
 void 		put_pixel(int px, int py, t_program *prog, int color);
+
+// fractol.c
+void		fractol_draw(t_program *prog, int max_iter);
+int			fractol_upscale_draw(t_program *prog);
 
 #endif
