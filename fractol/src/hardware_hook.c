@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hardware_hook.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:03:00 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/20 17:10:05 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/20 22:14:23 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int window_destroyed(t_program *prog)
 {
 	mlx_exit(prog);
+	return (true);
 }
 
 int	key_hook(int keycode, t_program *prog)
@@ -23,45 +24,38 @@ int	key_hook(int keycode, t_program *prog)
 	{
 		mlx_exit(prog);
 	}
+	return (true);
 }
 
-// int	mouse_event(int button, int x, int y, void *param)
-// {
-// 	t_program	*prog;
-// 	static int color = 0xABCDEF;
-
-// 	prog = param;
-// 	// 4: scroll_down, 5: scroll_up
-// 	if (button == 4)
-// 	{
-// 		color += 0x101010;
-// 	}
-// 	else if (button == 5)
-// 		color -= 0x101010;
-// 	if (prog->canvas->pixel_bits != 32)
-//     	color = mlx_get_color_value(prog->mlx, color);
-// 	for(int y = 0; y < 360; ++y) 
-// 	{
-// 		for(int x = 0; x < 1280; ++x)
-// 		{
-// 			int pixel = (y * prog->canvas->line_bytes) + (x * 4);
-// 			if (prog->canvas->endian == 1)        // Most significant (Alpha) byte first
-// 			{
-// 				prog->canvas->buffer[pixel + 0] = (color >> 24);
-// 				prog->canvas->buffer[pixel + 1] = (color >> 16) & 0xFF;
-// 				prog->canvas->buffer[pixel + 2] = (color >> 8) & 0xFF;
-// 				prog->canvas->buffer[pixel + 3] = (color) & 0xFF;
-// 			}
-// 			else if (prog->canvas->endian == 0)   // Least significant (Blue) byte first
-// 			{
-// 				prog->canvas->buffer[pixel + 0] = (color) & 0xFF;
-// 				prog->canvas->buffer[pixel + 1] = (color >> 8) & 0xFF;
-// 				prog->canvas->buffer[pixel + 2] = (color >> 16) & 0xFF;
-// 				prog->canvas->buffer[pixel + 3] = (color >> 24);
-// 			}
-// 			// printf("buffer: %x\n", buffer[pixel]);
-// 		}
-// 	}
-// 	mlx_put_image_to_window(prog->mlx, prog->win, prog->canvas->image, 0, 0);
-// 	printf("%d %d %d\n", button, x, y);
-// }
+int	mouse_event(int button, int x, int y, t_program	*prog)
+{
+	// 4: scroll_down, 5: scroll_up
+	if (button == 5)
+	{
+		printf("------------------\n");
+		mlx_prog_free(prog);
+		fractol_init_malloc(prog);
+		prog->coord.scale = prog->coord.scale * 1.5;
+		prog->coord.zero.x += (prog->coord.zero.x - x) * 0.5;
+		prog->coord.zero.y += (prog->coord.zero.y - y) * 0.5;
+		prog->canvas.level = 1;
+		printf("scale -> %lld\n", prog->coord.scale);
+		printf("zero.x -> %lld\n", prog->coord.zero.x);
+		printf("zero.y -> %lld\n", prog->coord.zero.y);
+	}
+	if (button == 4)
+	{
+		printf("------------------\n");
+		mlx_prog_free(prog);
+		fractol_init_malloc(prog);
+		prog->coord.scale = prog->coord.scale * 0.5;
+		prog->coord.zero.x -= (prog->coord.zero.x - x) * 0.5;
+		prog->coord.zero.y -= (prog->coord.zero.y - y) * 0.5;
+		prog->canvas.level = 1;
+		printf("scale -> %lld\n", prog->coord.scale);
+		printf("zero.x -> %lld\n", prog->coord.zero.x);
+		printf("zero.y -> %lld\n", prog->coord.zero.y);
+	}
+	printf("%d %d %d\n", button, x, y);
+	return (true);
+}

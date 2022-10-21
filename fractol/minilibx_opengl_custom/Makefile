@@ -31,3 +31,6 @@ test: all
 	@./a.out
 
 re: clean all
+
+%.o : %.m
+	${CC} ${CFLAGS} -c $< -o $@ -I${ORG}

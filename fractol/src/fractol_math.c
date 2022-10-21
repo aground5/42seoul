@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_math.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:40:57 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/20 15:13:43 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/20 22:16:04 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ bool	is_pixel_overflow(t_resolution *res, t_point *p)
 	if (p->x < 0 || p->y < 0 || res->width < p->x || res->height < p->y)
 		return (true);
 	return (false);
-}
-
-t_point	conv_coord_pixel(t_program *prog, t_ldpoint *coord)
-{
-	t_point	pixel;
-
-	pixel = prog->coord.zero;
-	pixel.x += (int)(coord->x * (long double)prog->coord.scale);
-	pixel.y -= (int)(coord->y * (long double)prog->coord.scale);
-	return (pixel);
 }
 
 t_ldpoint	conv_pixel_coord(t_program *prog, int x, int y)

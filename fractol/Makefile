@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/10/20 17:21:01 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/20 21:59:04 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ BSRCS =
 BOBJS = ${BSRCS:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 INC = -I./include -I${LIBFTDIR} -I${MLXDIR} -I${MLXCSTMDIR}
 LIB = -L${LIBFTDIR} -L${MLXDIR} -lft -lmlx
 
