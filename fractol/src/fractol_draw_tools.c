@@ -1,24 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_math.c                                     :+:      :+:    :+:   */
+/*   fractol_draw_tools.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 16:40:57 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/21 19:37:05 by sgi              ###   ########.fr       */
+/*   Created: 2022/10/21 19:55:15 by sgi               #+#    #+#             */
+/*   Updated: 2022/10/21 19:58:54 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_ldpoint	conv_pixel_coord(t_program *prog, int x, int y)
+int	reduce_2d1d(int *arr, int size)
 {
-	t_ldpoint	coord;
+	int	ret;
+	int	i;
 
-	coord.x = (long double)(x - prog->coord.zero.x) \
-	/ (long double)prog->coord.scale;
-	coord.y = (long double)(y - prog->coord.zero.y) \
-	/ (long double)prog->coord.scale;
-	return (coord);
+	ret = 0;
+	i = 0;
+	while (i <= size)
+	{
+		ret += arr[i];
+		i++;
+	}
+	return (ret);
+}
+
+void	index_itercount(t_program *prog, int *arr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < prog->resol.height)
+	{
+		j = 0;
+		while (j < prog->resol.width)
+		{
+			arr[prog->itercount[i][j]]++;
+			j++;
+		}
+		i++;
+	}
 }

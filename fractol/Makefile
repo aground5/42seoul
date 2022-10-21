@@ -3,16 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
+#    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/10/20 21:59:04 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/21 20:27:02 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-MSRCS = ./src/fractol.c ./src/hardware_hook.c ./src/mandelbrot.c ./src/fractol_tools.c ./src/fractol_math.c
+MSRCS = ./src/fractol.c \
+		./src/hardware_hook.c \
+		./src/mandelbrot.c \
+		./src/fractol_tools.c \
+		./src/fractol_math.c \
+		./src/fractol_draw.c \
+		./src/fractol_draw_tools.c \
+		./src/julia.c \
+		./src/fractol_array_shift.c
 MOBJS = ${MSRCS:.c=.o}
 BSRCS = 
 BOBJS = ${BSRCS:.c=.o}
@@ -42,7 +50,7 @@ else
 endif
 
 ${NAME} :	${LIBFT} ${MLX} ${OBJS}
-	${CC} -framework OpenGL -framework AppKit ${LIB} -o $@ ${OBJS}
+	${CC} ${OBJS} ${LIB} -framework OpenGL -framework AppKit -o $@
 
 all :	${NAME}
 
