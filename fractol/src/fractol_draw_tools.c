@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_draw_tools.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:55:15 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/21 19:58:54 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/22 15:25:19 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	reduce_2d1d(int *arr, int size)
 
 	ret = 0;
 	i = 0;
-	while (i <= size)
+	while (i < size)
 	{
 		ret += arr[i];
 		i++;

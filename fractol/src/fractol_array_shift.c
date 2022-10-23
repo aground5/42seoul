@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_array_shift.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:26:45 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/21 21:43:08 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/22 17:06:50 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+extern const int	g_max_iter_arr[11];
+
+inline static void	adjust_maxitercount(t_program *prog, int i, int j)
+{
+	if (prog->itercount[j][i] > prog->max_itercount)
+		prog->max_itercount = prog->itercount[j][i];
+}
 
 void	fractol_shift_left(t_program *prog)
 {
@@ -26,9 +34,8 @@ void	fractol_shift_left(t_program *prog)
 		while (j < prog->resol.height)
 		{
 			prog->itercount[j][i] = prog->itercount[j][i + shamt];
-			if (prog->itercount[j][i] > 1000)
-				prog->itercount[j][i] = 1000;
 			prog->zs[j][i] = prog->zs[j][i + shamt];
+			adjust_maxitercount(prog, i, j);
 			prog->itercount[j][i + shamt] = 0;
 			prog->zs[j][i + shamt].x = 0;
 			prog->zs[j][i + shamt].y = 0;
@@ -37,7 +44,6 @@ void	fractol_shift_left(t_program *prog)
 		i++;
 	}
 	prog->coord.zero.x -= shamt;
-	prog->canvas.level = 16;
 }
 
 void	fractol_shift_right(t_program *prog)
@@ -54,9 +60,8 @@ void	fractol_shift_right(t_program *prog)
 		while (j < prog->resol.height)
 		{
 			prog->itercount[j][i] = prog->itercount[j][i - shamt];
-			if (prog->itercount[j][i] > 1000)
-				prog->itercount[j][i] = 1000;
 			prog->zs[j][i] = prog->zs[j][i - shamt];
+			adjust_maxitercount(prog, i, j);
 			prog->itercount[j][i - shamt] = 0;
 			prog->zs[j][i - shamt].x = 0;
 			prog->zs[j][i - shamt].y = 0;
@@ -65,7 +70,6 @@ void	fractol_shift_right(t_program *prog)
 		i--;
 	}
 	prog->coord.zero.x += shamt;
-	prog->canvas.level = 16;
 }
 
 void	fractol_shift_down(t_program *prog)
@@ -82,9 +86,8 @@ void	fractol_shift_down(t_program *prog)
 		while (j >= shamt)
 		{
 			prog->itercount[j][i] = prog->itercount[j - shamt][i];
-			if (prog->itercount[j][i] > 1000)
-				prog->itercount[j][i] = 1000;
 			prog->zs[j][i] = prog->zs[j - shamt][i];
+			adjust_maxitercount(prog, i, j);
 			prog->itercount[j - shamt][i] = 0;
 			prog->zs[j - shamt][i].x = 0;
 			prog->zs[j - shamt][i].y = 0;
@@ -93,7 +96,6 @@ void	fractol_shift_down(t_program *prog)
 		i++;
 	}
 	prog->coord.zero.y += shamt;
-	prog->canvas.level = 16;
 }
 
 void	fractol_shift_up(t_program *prog)
@@ -110,9 +112,8 @@ void	fractol_shift_up(t_program *prog)
 		while (j < prog->resol.height - shamt)
 		{
 			prog->itercount[j][i] = prog->itercount[j + shamt][i];
-			if (prog->itercount[j][i] > 1000)
-				prog->itercount[j][i] = 1000;
 			prog->zs[j][i] = prog->zs[j + shamt][i];
+			adjust_maxitercount(prog, i, j);
 			prog->itercount[j + shamt][i] = 0;
 			prog->zs[j + shamt][i].x = 0;
 			prog->zs[j + shamt][i].y = 0;
@@ -121,5 +122,4 @@ void	fractol_shift_up(t_program *prog)
 		i++;
 	}
 	prog->coord.zero.y -= shamt;
-	prog->canvas.level = 16;
 }

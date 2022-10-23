@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/10/21 20:27:02 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/22 17:18:42 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ MSRCS = ./src/fractol.c \
 		./src/fractol_draw.c \
 		./src/fractol_draw_tools.c \
 		./src/julia.c \
-		./src/fractol_array_shift.c
+		./src/fractol_array_shift.c \
+		./src/fractol_array_zoom.c
 MOBJS = ${MSRCS:.c=.o}
 BSRCS = 
 BOBJS = ${BSRCS:.c=.o}

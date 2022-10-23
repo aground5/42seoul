@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:28:32 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/21 20:12:14 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/22 16:39:35 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	fractol_reboot(t_program *prog)
 {
 	mlx_prog_free(prog);
 	fractol_init_malloc(prog);
-	prog->canvas.level = 1;
+	prog->canvas.level = 0;
+	prog->max_itercount = 0;
+	prog->terminate = false;
 }
 
 int	get_color(long double t)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:06 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/21 21:41:36 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/22 16:39:50 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ void	fractol_init_malloc(t_program *prog)
 	(int **)ft_calloc(prog->resol.height, sizeof(int *));
 	prog->itercount[0] = \
 	(int *)ft_calloc(prog->resol.width * prog->resol.height, sizeof(int));
-	i = 1;
-	while (i < prog->resol.height)
-	{
-		prog->itercount[i] = prog->itercount[i - 1] + prog->resol.width;
-		i++;
-	}
 	prog->zs = (t_ldpoint **)ft_calloc(prog->resol.height, \
 	sizeof(t_ldpoint *));
 	prog->zs[0] = (t_ldpoint *)ft_calloc(prog->resol.width \
@@ -33,6 +27,7 @@ void	fractol_init_malloc(t_program *prog)
 	i = 1;
 	while (i < prog->resol.height)
 	{
+		prog->itercount[i] = prog->itercount[i - 1] + prog->resol.width;
 		prog->zs[i] = prog->zs[i - 1] + prog->resol.width;
 		i++;
 	}
@@ -52,8 +47,10 @@ void	fractol_init(t_program *prog)
 	prog->resol.height);
 	prog->canvas.buffer = mlx_get_data_addr(prog->canvas.image, \
 	&prog->canvas.pixel_bits, &prog->canvas.line_bytes, &prog->canvas.endian);
-	prog->canvas.level = 1;
+	prog->canvas.level = 0;
 	prog->fractal = 1;
+	prog->max_itercount = 0;
+	prog->terminate = false;
 	fractol_init_malloc(prog);
 }
 
