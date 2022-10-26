@@ -73,18 +73,15 @@ static char	**ps_flatten_list_to_array(t_list *head, int endIdx)
 {
 	char	**log;
 	t_list	*tmp;
-	t_list	*prev;
 
 	log = (char **)ft_calloc(endIdx + 1, sizeof(char *));
 	endIdx--;
-	tmp = head;
-	while (tmp->next != NULL)
+	while (head->next != NULL)
 	{
-		prev = tmp;
-		tmp = tmp->next;
-		if (prev != head)
-			free(prev);
+		tmp = head->next;
 		log[endIdx] = tmp->content;
+		head->next = tmp->next;
+		free(tmp);
 		endIdx--;
 	}
 	return (log);

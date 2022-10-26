@@ -16,7 +16,7 @@ SRCS = ./src/push_swap.c ./src/ps_tools.c ./src/ps_algo.c ./src/ps_algo_tools.c 
 OBJS = ${SRCS:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 INC = -I./include -I${LIBFTDIR} -I${PRINTFDIR}/include
 LIB = -L${LIBFTDIR} -lft -L${PRINTFDIR} -lftprintf
 
