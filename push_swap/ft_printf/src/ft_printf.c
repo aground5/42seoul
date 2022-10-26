@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:40:58 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/15 16:35:57 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/26 14:23:40 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	ft_printf_judge(char *s, va_list *vlst)
 	else if (*s == 'i')
 		ft_printf_putnbr(va_arg(*vlst, int32_t), &count);
 	else if (*s == 'u')
-		ft_printf_putnbr_ub("0123456789", va_arg(*vlst, uint32_t), &count);
+		ft_printf_putunbr("0123456789", va_arg(*vlst, uint32_t), &count);
 	else if (*s == 'x')
-		ft_printf_putnbr_ub("0123456789abcdef", va_arg(*vlst, uint32_t), &count);
+		ft_printf_putunbr("0123456789abcdef", va_arg(*vlst, uint32_t), &count);
 	else if (*s == 'X')
-		ft_printf_putnbr_ub("0123456789ABCDEF", va_arg(*vlst, uint32_t), &count);
+		ft_printf_putunbr("0123456789ABCDEF", va_arg(*vlst, uint32_t), &count);
 	else if (*s == '%')
 		count += ft_printf_putchar('%');
 	return (count);

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:45:35 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/14 21:35:39 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/26 14:23:40 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_internal.h"
 
-void	ft_printf_putnbr_ub(char *base, uint32_t nb, int *count)
+void	ft_printf_putunbr(char *base, uint32_t nb, int *count)
 {
 	uint32_t	base_num;
 
 	base_num = ft_printf_strlen(base);
 	if (nb >= base_num)
 	{
-		ft_printf_putnbr_ub(base, nb / base_num, count);
+		ft_printf_putunbr(base, nb / base_num, count);
 		nb = nb % base_num;
 	}
 	if (nb < base_num)

@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:42:04 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/24 18:26:17 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/26 15:19:50 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,26 @@ void	print_op(char **log)
 
 int	main(int argc, char **argv)
 {
-	int	*a;
+	int		*a;
+	char	**num_arg;
+	int		size;
 
 	if (argc < 2)
 		return (1);
-	a = validate_arguements(argc - 1, &argv[1]);
+	size = argc - 1;
+	num_arg = &argv[1];
+	if (argc == 2)
+		num_arg = parse_onearg(argv[1], &size);
+	a = validate_arguements(size, num_arg);
 	if (a == NULL)
 	{
 		write(STDERR_FILENO, "Error\n", ft_strlen("Error\n"));
 		return (1);
 	}
-	algo_init(a, argc - 1);
+	algo_init(a, size);
 	print_op(ps_optimize_move());
+	if (argc == 2)
+		free_split(num_arg);
 	return (0);
 }
 
@@ -87,4 +95,17 @@ bool	is_duplicated(int *arr, int size)
 		i++;
 	}
 	return (false);
+}
+
+char	**parse_onearg(char *onearg, int *size)
+{
+	char	**split;
+
+	split = ft_split(onearg, ' ');
+	*size = 0;
+	while (split[*size] != 0)
+	{
+		(*size)++;
+	}
+	return (split);
 }

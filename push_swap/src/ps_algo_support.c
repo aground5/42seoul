@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 21:18:03 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/17 11:32:22 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/26 14:27:54 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	algo_struct_init(t_queue *a, t_queue *b, int size)
 void	ps_intarrcpy(int *dst, const int *src, int n)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < n)
 	{

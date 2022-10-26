@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 11:49:16 by sgi               #+#    #+#             */
-/*   Updated: 2022/09/17 13:04:17 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/26 14:28:12 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	ps_ra(t_queue *a, bool initialize)
 int	ps_rb(t_queue *b, bool initialize)
 {
 	static int	called;
-	int	tmp;
-	int	i;
+	int			tmp;
+	int			i;
 
 	if (initialize)
 		called = 0;

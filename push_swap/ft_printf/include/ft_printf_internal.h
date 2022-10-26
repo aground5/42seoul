@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_internal.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 16:29:24 by sgi               #+#    #+#             */
-/*   Updated: 2022/07/15 16:36:26 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/26 14:24:25 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_printf_strlen(char *s);
 int		ft_printf_putchar(int c);
 int		ft_printf_putstr(char *s);
 
-void	ft_printf_putnbr_ub(char *base, uint32_t nb, int *count);
+void	ft_printf_putunbr(char *base, uint32_t nb, int *count);
 void	ft_printf_putnbr(int32_t nb, int *count);
 void	ft_printf_putpnt(uint64_t nb, int *count);
 
