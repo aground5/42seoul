@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 15:37:04 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/23 15:38:05 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 22:15:57 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@
 inline void	julia(t_program *prog, t_point *p,
 							int max_iter)
 {
-	t_ldpoint	c;
 	t_ldpoint	z_square;
 
-	c.x = 0.285;
-	c.y = 0.01;
 	if (prog->zs[p->y][p->x].x == 0 && \
 	prog->zs[p->y][p->x].y == 0)
 		prog->zs[p->y][p->x] = conv_pixel_coord(prog, p->x, p->y);
@@ -36,8 +33,8 @@ inline void	julia(t_program *prog, t_point *p,
 			break ;
 		}
 		prog->zs[p->y][p->x].y \
-		= 2 * prog->zs[p->y][p->x].x * prog->zs[p->y][p->x].y + c.y;
-		prog->zs[p->y][p->x].x = z_square.x - z_square.y + c.x;
+		= 2 * prog->zs[p->y][p->x].x * prog->zs[p->y][p->x].y + prog->c.y;
+		prog->zs[p->y][p->x].x = z_square.x - z_square.y + prog->c.x;
 		z_square.x = prog->zs[p->y][p->x].x * prog->zs[p->y][p->x].x;
 		z_square.y = prog->zs[p->y][p->x].y * prog->zs[p->y][p->x].y;
 		prog->itercount[p->y][p->x]++;

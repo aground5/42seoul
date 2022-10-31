@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:08 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/31 21:11:08 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 22:34:29 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_program
 	bool			terminate;
 	int				max_itercount;
 	t_ldpoint		**zs;
+	t_ldpoint		c;
 	int				fractal;
 }					t_program;
 
@@ -84,6 +85,8 @@ int			mouse_event(int button, int x, int y, t_program	*prog);
 // fractal_functions
 void		calc_mandelbrot(t_program *prog, int max_iter);
 void		calc_julia(t_program *prog, int max_iter);
+void		julia_init_with_parameter(t_program *prog, char **argv);
+void		julia_init(t_program *prog, int argc, char **argv);
 
 // fractol_math.c
 t_ldpoint	conv_pixel_coord(t_program *prog, int x, int y);

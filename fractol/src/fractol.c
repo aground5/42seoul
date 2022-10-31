@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:06 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/31 20:29:33 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 22:34:21 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ int	main(int argc, char **argv)
 {
 	t_program	prog;
 
-	if (argc != 2)
-		display();
-	if (argv[1][0] == '1' && argv[1][1] == '\0')
+	if (argc == 2 && argv[1][0] == '1' && argv[1][1] == '\0')
 		fractol_init(&prog, 1);
-	else if (argv[1][0] == '2' && argv[1][1] == '\0')
+	else if (argc > 1 && argv[1][0] == '2' && argv[1][1] == '\0')
+	{
+		julia_init(&prog, argc, argv);
 		fractol_init(&prog, 2);
+	}
 	else
 		display();
 	mlx_loop_hook(prog.mlx, fractol_upscale_draw, &prog);

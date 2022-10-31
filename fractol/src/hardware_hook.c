@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:03:00 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/23 16:38:46 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 22:29:52 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ int	key_hook(int keycode, t_program *prog)
 {
 	if (keycode == 53)
 		mlx_exit(prog);
-	else if (keycode >= 18 && keycode <= 19)
-	{
-		prog->fractal = keycode - 17;
-		fractol_reboot(prog);
-	}
 	else if (keycode >= 123 && keycode <= 126)
 	{
 		prog->max_itercount = 0;
