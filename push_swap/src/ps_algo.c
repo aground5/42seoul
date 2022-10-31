@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:25:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/26 16:08:18 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 18:56:03 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ void	algo_init(int *a_arr, int size)
 	a.arr = a_arr;
 	algo_struct_init(&a, &b, size);
 	mini_queue.queue = a;
-	proceed_push_swap_ascend(&a, &b, mini_queue);
+	if (a.size == 3)
+		proceed_push_swap_three(&a);
+	else if (a.size == 5)
+		proceed_push_swap_five(&a, &b, mini_queue);
+	else
+		proceed_push_swap_ascend(&a, &b, mini_queue);
 	free(a.arr);
 	free(b.arr);
 }

@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 14:30:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/26 14:57:18 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 20:22:43 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static char	**ps_realloc(char **src, int size)
 	if (ret == NULL)
 		exit(-1);
 	ft_memcpy(ret, src, (size - 1) * sizeof(char *));
-	free(src);
+	if (src != NULL)
+		free(src);
 	return (ret);
 }
 
@@ -95,6 +96,8 @@ char	**ps_optimize_move(void)
 	int		i;
 
 	log = ps_log_move(NULL);
+	if (log[0] == NULL)
+		return (log);
 	head.next = (t_list *)ft_calloc(1, sizeof(t_list));
 	if (head.next == NULL)
 		exit(-1);

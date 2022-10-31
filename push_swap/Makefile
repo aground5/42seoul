@@ -6,17 +6,17 @@
 #    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/27 20:23:35 by sgi               #+#    #+#              #
-#    Updated: 2022/10/26 19:39:24 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/31 20:25:47 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = ./src/push_swap.c ./src/ps_tools.c ./src/ps_algo.c ./src/ps_algo_tools.c ./src/ps_algo_tools2.c ./src/quicksort.c ./src/ps_algo_support.c ./src/ps_op_log.c ./src/ps_linked_list.c ./src/ps_algo_asecnd_detail.c ./src/ps_algo_desecnd_detail.c
+SRCS = ./src/push_swap.c ./src/ps_tools.c ./src/ps_algo.c ./src/ps_algo_tools.c ./src/ps_algo_tools2.c ./src/quicksort.c ./src/ps_algo_support.c ./src/ps_op_log.c ./src/ps_linked_list.c ./src/ps_algo_asecnd_detail.c ./src/ps_algo_desecnd_detail.c ./src/ps_hardcoding.c
 OBJS = ${SRCS:.c=.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 INC = -I./include -I${LIBFTDIR} -I${PRINTFDIR}/include
 LIB = -L${LIBFTDIR} -lft -L${PRINTFDIR} -lftprintf
 
@@ -34,9 +34,6 @@ ${NAME} :	${LIBFT} ${PRINTF} ${OBJS}
 	${CC} ${CFLAGS} -o $@ ${OBJS} ${LIB}
 
 all :	${NAME}
-
-bonus :
-	${MAKE} BONUS=1
 
 clean :
 	${RM} ${OBJS}

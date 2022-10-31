@@ -6,7 +6,7 @@
 /*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:05:40 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/26 16:09:16 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 19:00:50 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void	ps_first_miniqueue_descend(t_queue *b, t_ext_queue *q,
 			t_ext_queue *mq, int size);
 void	ps_second_miniqueue_descend(t_queue *b, t_ext_queue *q,
 			t_ext_queue *mq);
+
+void	proceed_push_swap_three(t_queue *a);
+void	proceed_push_swap_five(t_queue *a, t_queue *b, t_ext_queue q);
 
 #endif
