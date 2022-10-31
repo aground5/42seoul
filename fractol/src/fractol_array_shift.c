@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_array_shift.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:26:45 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/22 17:06:50 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/23 16:32:01 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-extern const int	g_max_iter_arr[11];
-
-inline static void	adjust_maxitercount(t_program *prog, int i, int j)
-{
-	if (prog->itercount[j][i] > prog->max_itercount)
-		prog->max_itercount = prog->itercount[j][i];
-}
+extern inline void	adjust_maxitercount(t_program *prog, int i, int j);
 
 void	fractol_shift_left(t_program *prog)
 {
@@ -35,7 +29,7 @@ void	fractol_shift_left(t_program *prog)
 		{
 			prog->itercount[j][i] = prog->itercount[j][i + shamt];
 			prog->zs[j][i] = prog->zs[j][i + shamt];
-			adjust_maxitercount(prog, i, j);
+			adjust_maxitercount(prog, j, i);
 			prog->itercount[j][i + shamt] = 0;
 			prog->zs[j][i + shamt].x = 0;
 			prog->zs[j][i + shamt].y = 0;
@@ -61,7 +55,7 @@ void	fractol_shift_right(t_program *prog)
 		{
 			prog->itercount[j][i] = prog->itercount[j][i - shamt];
 			prog->zs[j][i] = prog->zs[j][i - shamt];
-			adjust_maxitercount(prog, i, j);
+			adjust_maxitercount(prog, j, i);
 			prog->itercount[j][i - shamt] = 0;
 			prog->zs[j][i - shamt].x = 0;
 			prog->zs[j][i - shamt].y = 0;
@@ -87,7 +81,7 @@ void	fractol_shift_down(t_program *prog)
 		{
 			prog->itercount[j][i] = prog->itercount[j - shamt][i];
 			prog->zs[j][i] = prog->zs[j - shamt][i];
-			adjust_maxitercount(prog, i, j);
+			adjust_maxitercount(prog, j, i);
 			prog->itercount[j - shamt][i] = 0;
 			prog->zs[j - shamt][i].x = 0;
 			prog->zs[j - shamt][i].y = 0;
@@ -113,7 +107,7 @@ void	fractol_shift_up(t_program *prog)
 		{
 			prog->itercount[j][i] = prog->itercount[j + shamt][i];
 			prog->zs[j][i] = prog->zs[j + shamt][i];
-			adjust_maxitercount(prog, i, j);
+			adjust_maxitercount(prog, j, i);
 			prog->itercount[j + shamt][i] = 0;
 			prog->zs[j + shamt][i].x = 0;
 			prog->zs[j + shamt][i].y = 0;

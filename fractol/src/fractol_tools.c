@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 13:28:32 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/22 16:39:35 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/23 17:34:24 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+extern const int	g_step;
 
 void	mlx_prog_free(t_program *prog)
 {
@@ -64,6 +66,8 @@ bool	draw_canvas(t_program *prog, long double *colorLUT)
 		while (px < prog->resol.width)
 		{
 			normed_offset = colorLUT[prog->itercount[py][px]];
+			if (prog->itercount[py][px] == prog->max_itercount)
+				normed_offset = colorLUT[(prog->canvas.level + 1) * g_step];
 			pixel = py * prog->resol.width + px;
 			((int *)prog->canvas.buffer)[pixel] = get_color(normed_offset);
 			if (((int *)prog->canvas.buffer)[pixel] != 0)

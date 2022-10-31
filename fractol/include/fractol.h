@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:08 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/22 17:32:09 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 21:11:08 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FRACTOL_H
 
 # include "mlx.h"
-# include "mlx_custom.h"
 # include "libft.h"
 # include <fcntl.h>
 # include <unistd.h>
@@ -97,26 +96,42 @@ int			get_color(long double t);
 bool		draw_canvas(t_program *prog, long double *colorLUT);
 
 // fractol_draw.c
-void		fractol_draw(t_program *prog, int max_iter);
-long double	*fractol_coloring(t_program *prog);
 void		fractol_calc(t_program *prog, int max_iter);
+long double	*fractol_coloring(t_program *prog);
+void		fractol_draw(t_program *prog, int max_iter);
+int			fractol_upscale_draw(t_program *prog);
 
 // fractol_draw_tools.c
 int			reduce_2d1d(int *arr, int size);
+int			max_indexof_array(int *arr, int size);
+int			semimax_indexof_array(int *arr, int size, int max_idx);
 void		index_itercount(t_program *prog, int *arr);
 
 // fractol_array_shift.c
+inline void	adjust_maxitercount(t_program *prog, int i, int j)
+{
+	if (prog->itercount[i][j] > prog->max_itercount)
+		prog->max_itercount = prog->itercount[i][j];
+}
 void		fractol_shift_left(t_program *prog);
 void		fractol_shift_right(t_program *prog);
 void		fractol_shift_up(t_program *prog);
 void		fractol_shift_down(t_program *prog);
 
 // fractol_array_zoom.c
+inline void	fz_fin(t_program *prog, int **itercount, t_ldpoint **zs)
+{
+	free(prog->itercount[0]);
+	free(prog->itercount);
+	free(prog->zs[0]);
+	free(prog->zs);
+	prog->itercount = itercount;
+	prog->zs = zs;
+}
 void		fractol_zoom_in(t_program *prog, int x, int y);
 void		fractol_zoom_out(t_program *prog, int x, int y);
 
 // fractol.c
 void		fractol_init_malloc(t_program *prog);
-int			fractol_upscale_draw(t_program *prog);
 
 #endif

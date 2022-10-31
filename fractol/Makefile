@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+         #
+#    By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 07:33:16 by sgi               #+#    #+#              #
-#    Updated: 2022/10/22 17:18:42 by sgi              ###   ########.fr        #
+#    Updated: 2022/10/31 21:12:40 by sgi              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-MSRCS = ./src/fractol.c \
+SRCS = ./src/fractol.c \
 		./src/hardware_hook.c \
 		./src/mandelbrot.c \
 		./src/fractol_tools.c \
@@ -22,13 +22,11 @@ MSRCS = ./src/fractol.c \
 		./src/julia.c \
 		./src/fractol_array_shift.c \
 		./src/fractol_array_zoom.c
-MOBJS = ${MSRCS:.c=.o}
-BSRCS = 
-BOBJS = ${BSRCS:.c=.o}
+OBJS = ${SRCS:.c=.o}
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3
-INC = -I./include -I${LIBFTDIR} -I${MLXDIR} -I${MLXCSTMDIR}
+INC = -I./include -I${LIBFTDIR} -I${MLXDIR}
 LIB = -L${LIBFTDIR} -L${MLXDIR} -lft -lmlx
 
 RM = rm -rf
@@ -38,30 +36,18 @@ MCDFLAG = -C
 LIBFTDIR = ./libft
 LIBFT = ${LIBFTDIR}/libft.a
 
-MLXCSTMDIR = ./minilibx_opengl_custom
 MLXDIR = ./minilibx_opengl
 MLX = ${MLXDIR}/libmlx.a
-
-ifndef BONUS
-	SRCS = ${MSRCS}
-	OBJS = ${MOBJS}
-else
-	SRCS = ${BSRCS}
-	OBJS = ${BOBJS}
-endif
 
 ${NAME} :	${LIBFT} ${MLX} ${OBJS}
 	${CC} ${OBJS} ${LIB} -framework OpenGL -framework AppKit -o $@
 
 all :	${NAME}
 
-bonus :
-	${MAKE} BONUS=1
-
 clean :
 	${RM} ${OBJS}
 	${MAKE} ${MCDFLAG} ${LIBFTDIR} clean
-	${MAKE} ${MCDFLAG} ${MLXCSTMDIR} clean
+	${MAKE} ${MCDFLAG} ${MLXDIR} clean
 
 fclean :	clean
 	${RM} ${LIBFT}
@@ -73,7 +59,7 @@ ${LIBFT} :
 	${MAKE} ${MCDFLAG} ${LIBFTDIR}
 
 ${MLX} :
-	${MAKE} ${MCDFLAG} ${MLXCSTMDIR}
+	${MAKE} ${MCDFLAG} ${MLXDIR}
 
 .PHONY : all bonus clean fclean re
 

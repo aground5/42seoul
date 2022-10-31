@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 07:51:06 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/22 16:39:50 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/31 20:29:33 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	fractol_init_malloc(t_program *prog)
 	}
 }
 
-void	fractol_init(t_program *prog)
+static void	fractol_init(t_program *prog, int fractal)
 {
 	prog->resol.width = 1280;
 	prog->resol.height = 1000;
@@ -48,17 +48,32 @@ void	fractol_init(t_program *prog)
 	prog->canvas.buffer = mlx_get_data_addr(prog->canvas.image, \
 	&prog->canvas.pixel_bits, &prog->canvas.line_bytes, &prog->canvas.endian);
 	prog->canvas.level = 0;
-	prog->fractal = 1;
+	prog->fractal = fractal;
 	prog->max_itercount = 0;
 	prog->terminate = false;
 	fractol_init_malloc(prog);
 }
 
-int	main(void)
+static void	display(void)
+{
+	printf("[Available Fractal]\n");
+	printf("1. Mandelbot\n");
+	printf("2. Julia\n");
+	exit(-1);
+}
+
+int	main(int argc, char **argv)
 {
 	t_program	prog;
 
-	fractol_init(&prog);
+	if (argc != 2)
+		display();
+	if (argv[1][0] == '1' && argv[1][1] == '\0')
+		fractol_init(&prog, 1);
+	else if (argv[1][0] == '2' && argv[1][1] == '\0')
+		fractol_init(&prog, 2);
+	else
+		display();
 	mlx_loop_hook(prog.mlx, fractol_upscale_draw, &prog);
 	mlx_hook(prog.win, 17, 1L << 0, window_destroyed, &prog);
 	mlx_key_hook(prog.win, key_hook, &prog);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hardware_hook.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 21:03:00 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/22 17:31:57 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/23 16:38:46 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,38 @@ int	key_hook(int keycode, t_program *prog)
 	return (true);
 }
 
+void	log_mouse_event(t_program *prog)
+{
+	printf("------------------\n");
+	printf("scale -> %lld\n", prog->coord.scale);
+	printf("zero.x -> %lld\n", prog->coord.zero.x);
+	printf("zero.y -> %lld\n", prog->coord.zero.y);
+	printf("max_itercount -> %d\n", prog->max_itercount);
+}
+
 // 4: scroll_down, 5: scroll_up
 int	mouse_event(int button, int x, int y, t_program	*prog)
 {
 	if (button == 5)
 	{
-		printf("------------------\n");
+		prog->max_itercount = 0;
+		prog->terminate = false;
 		prog->coord.scale = prog->coord.scale * 1.5;
 		prog->coord.zero.x += (prog->coord.zero.x - x) * 0.5;
 		prog->coord.zero.y += (prog->coord.zero.y - y) * 0.5;
+		fractol_zoom_in(prog, x, y);
+		prog->canvas.level = 0;
+	}
+	else if (button == 4)
+	{
 		prog->max_itercount = 0;
 		prog->terminate = false;
-		prog->canvas.level = 0;
-		fractol_zoom_in(prog, x, y);
-		printf("scale -> %lld\n", prog->coord.scale);
-		printf("zero.x -> %lld\n", prog->coord.zero.x);
-		printf("zero.y -> %lld\n", prog->coord.zero.y);
-	}
-	if (button == 4)
-	{
-		printf("------------------\n");
 		prog->coord.scale = prog->coord.scale * 0.5;
 		prog->coord.zero.x -= (prog->coord.zero.x - x) * 0.5;
 		prog->coord.zero.y -= (prog->coord.zero.y - y) * 0.5;
-		prog->max_itercount = 0;
-		prog->terminate = false;
-		prog->canvas.level = 0;
 		fractol_zoom_out(prog, x, y);
-		printf("scale -> %lld\n", prog->coord.scale);
-		printf("zero.x -> %lld\n", prog->coord.zero.x);
-		printf("zero.y -> %lld\n", prog->coord.zero.y);
+		prog->canvas.level = 0;
 	}
-	printf("%d %d %d\n", button, x, y);
+	log_mouse_event(prog);
 	return (true);
 }

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:56:00 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/22 17:24:08 by sgi              ###   ########.fr       */
+/*   Updated: 2022/10/23 17:35:31 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-const int	g_max_iter_arr[10] = \
-	{5, 10, 30, 50, 100, 150, 200, 300, 400, 500};
+const int	g_step = 50;
 
 void	fractol_calc(t_program *prog, int max_iter)
 {
@@ -22,6 +21,15 @@ void	fractol_calc(t_program *prog, int max_iter)
 		calc_mandelbrot(prog, max_iter);
 	else if (prog->fractal == 2)
 		calc_julia(prog, max_iter);
+}
+
+static void	fractol_adjust_color(t_program *prog, int *num_iter_pixel)
+{
+	if (prog->max_itercount == (prog->canvas.level + 1) * g_step)
+		return ;
+	num_iter_pixel[(prog->canvas.level + 1) * g_step] +=\
+	num_iter_pixel[prog->max_itercount];
+	num_iter_pixel[prog->max_itercount] = 0;
 }
 
 long double	*fractol_coloring(t_program *prog)
@@ -34,7 +42,8 @@ long double	*fractol_coloring(t_program *prog)
 	num_iter_pixel = (int *)ft_calloc(prog->max_itercount + 1, sizeof(int));
 	color_lut = (long double *)ft_calloc(prog->max_itercount + 1,
 			sizeof(long double));
-	index_itercount(prog, num_iter_pixel);
+	index_itercount(prog, num_iter_pixel);	
+	fractol_adjust_color(prog, num_iter_pixel);
 	total = reduce_2d1d(num_iter_pixel, prog->max_itercount + 1);
 	color_lut[0] = (long double)num_iter_pixel[0] / (long double)total;
 	i = 1;
@@ -76,19 +85,13 @@ int	fractol_upscale_draw(t_program *prog)
 	if (tic > 5)
 	{
 		if (prog->terminate)
-			mlx_put_image_to_window(prog->mlx, prog->win, prog->canvas.image, 0, 0);
-		else if (prog->canvas.level < 10)
-		{
-			if (prog->max_itercount < g_max_iter_arr[prog->canvas.level])
-				prog->max_itercount = g_max_iter_arr[prog->canvas.level];
-			fractol_draw(prog, g_max_iter_arr[prog->canvas.level]);
-			prog->canvas.level++;
-		}
+			mlx_put_image_to_window(prog->mlx, prog->win,
+				prog->canvas.image, 0, 0);
 		else
 		{
-			if (prog->max_itercount < (prog->canvas.level - 5) * 100)
-				prog->max_itercount = (prog->canvas.level - 5) * 100;
-			fractol_draw(prog, (prog->canvas.level - 5) * 100);
+			if (prog->max_itercount < (prog->canvas.level + 1) * g_step)
+				prog->max_itercount = (prog->canvas.level + 1) * g_step;
+			fractol_draw(prog, (prog->canvas.level + 1) * g_step);
 			prog->canvas.level++;
 		}
 		tic = 0;
