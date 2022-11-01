@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:34:36 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/31 22:35:17 by sgi              ###   ########.fr       */
+/*   Updated: 2022/11/01 09:59:30 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	julia_init_with_parameter(t_program *prog, char **argv)
 
 	x = ft_atoi(argv[2]);
 	y = ft_atoi(argv[3]);
-
 	if (x >= 0 && x <= 1000 && y >= 0 && y <= 1000)
 	{
 		prog->c.x = x / 1000.0L;
@@ -60,7 +59,7 @@ void	julia_init_with_parameter(t_program *prog, char **argv)
 void	julia_init(t_program *prog, int argc, char **argv)
 {
 	if (argc == 4)
-			julia_init_with_parameter(prog, argv);
+		julia_init_with_parameter(prog, argv);
 	else if (argc == 2)
 	{
 		prog->c.x = 0.285;

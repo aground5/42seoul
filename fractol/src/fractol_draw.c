@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgi <sgi@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sgi <sgi@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:56:00 by sgi               #+#    #+#             */
-/*   Updated: 2022/10/23 17:35:31 by sgi              ###   ########.fr       */
+/*   Updated: 2022/11/01 09:59:58 by sgi              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	fractol_adjust_color(t_program *prog, int *num_iter_pixel)
 {
 	if (prog->max_itercount == (prog->canvas.level + 1) * g_step)
 		return ;
-	num_iter_pixel[(prog->canvas.level + 1) * g_step] +=\
+	num_iter_pixel[(prog->canvas.level + 1) * g_step] += \
 	num_iter_pixel[prog->max_itercount];
 	num_iter_pixel[prog->max_itercount] = 0;
 }
@@ -42,7 +42,7 @@ long double	*fractol_coloring(t_program *prog)
 	num_iter_pixel = (int *)ft_calloc(prog->max_itercount + 1, sizeof(int));
 	color_lut = (long double *)ft_calloc(prog->max_itercount + 1,
 			sizeof(long double));
-	index_itercount(prog, num_iter_pixel);	
+	index_itercount(prog, num_iter_pixel);
 	fractol_adjust_color(prog, num_iter_pixel);
 	total = reduce_2d1d(num_iter_pixel, prog->max_itercount + 1);
 	color_lut[0] = (long double)num_iter_pixel[0] / (long double)total;
